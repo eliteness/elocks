@@ -37,7 +37,6 @@ body {
 
 small {
 	color: white;
-	font-family: sans-serif;
 }
 
 .partnership, .extra {
@@ -51,16 +50,14 @@ small {
 }
 
 p {
-	font-family: sans-serif;
-	font-size: 1em;
+		font-size: 1em;
 	text-align: center;
 	margin-top: 5px;
 }
 
 h1, h2 {
 	color: white;
-	font-family: sans-serif;
-	text-align: center;
+		text-align: center;
 }
 
 h1 span, h2 span {
@@ -109,13 +106,12 @@ button,select {
 	background-color: #ea00cb;
 	padding: 10px 30px;
 	border-radius: 30px;
-	font-family: sans-serif;
-	font-weight: bold;
+		font-weight: bold;
 	color: white;
 }
 
 button.submit {
-	width: 60%;
+	width: 100%;
 	margin-top: ;
 	padding: 6px;
 	font-size: 0.75em;
@@ -369,6 +365,8 @@ textarea:focus, input:focus {
 	background: rgba(0,0,0,0.5) !important;;
 	border-radius: 8px;
 	padding: 8px;
+	border: none;
+	margin: 5px;
 }
 
 #main-area {
@@ -413,7 +411,7 @@ textarea:focus, input:focus {
 .topstat {
 	margin: 5px 0px;
 	padding: 20px;
-	background: #0007;
+	background: #4567;
 	border-radius: 10px
 }
 .topstat div:first-child {
@@ -425,6 +423,12 @@ textarea:focus, input:focus {
 	font-family: light;
 	font-size: 0.7em
 }
+
+.c2a input {
+	width:calc(100% - 20px);
+	text-align: center;
+}
+
 
 @media(min-width:641px) {
 	#cw {
@@ -500,10 +504,10 @@ textarea:focus, input:focus {
 	}
 
 	.c2a {
-		text-align: right;
+		text-align: center;
 	}
 
-	.c2a-1 {
+	.c2a-1, .c2a input {
 		width: calc(33% - 25px) !important;
 	}
 
@@ -579,6 +583,7 @@ textarea:focus, input:focus {
 	.arrow-content {
   		margin-left: 35px;
   	}
+
 }
 
 
@@ -587,7 +592,7 @@ textarea:focus, input:focus {
 	grid-template-columns:auto;
 	margin:0;
 	padding:2vh 1vw;
-	position: sticky;
+	position: relative;
 	top: 0;
 	background:linear-gradient(to bottom, rgba(0,0,16,0.8), rgba(0,19,55,0.8));
 	z-index:0;
@@ -604,6 +609,15 @@ textarea:focus, input:focus {
 	font-family: light;
 	text-decoration: none;
 }
+
+@media(min-width:641px) {
+  	/*
+  	.topnav {
+  		position: sticky;
+  	}
+  	*/
+}
+
 
 
 
@@ -683,6 +697,34 @@ img.bigthumb {
 	padding: 5px 10px;
 }
 
+.coll {
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+.coll div {
+	background: #000;
+	padding: 10px;
+	border-radius: 10px;
+	font-size: 1.5em;
+	font-family: bold;
+	margin: 5px;
+}
+.coll div span {
+	background: -webkit-linear-gradient(left, #035cd6, #2cfbee);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 2em;
+}
+.coll div:hover {
+	position: relative;
+	bottom: 10px;
+	box-shadow: 0px 5px 12px 2px #7ff;
+	cursor: pointer;
+	background: #012;
+	color: blac;
+}
+
 @media(min-width:641px) {
 	.topnav {
 		display:grid;
@@ -710,5 +752,12 @@ img.bigthumb {
 	}
 	.subnav-link {
 		margin: -2px 2px;
+	}
+	.coll {
+		display: grid;
+		grid-template-columns: 20% 20% 20% 20% 20%;
+	}
+	.coll div {
+		margin: 10px;
 	}
 }
