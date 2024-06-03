@@ -80,104 +80,53 @@
 
 
 		<div class="c2a">
+			<form>
 
-			<br>
-			<br>
-			<h3 class="">
-				<span>Getting started is so easy!</span>
-			</h3>
+				<br>
+				<br>
+				<h3 class="">
+					<span>Getting started is so easy!</span>
+				</h3>
 
-			<br>1. Choose the Pool
-			<br>
-			<input class="in-box" id="cl-lp" placeholder="0x1234..5678">
+				<br>1. Choose the Pool
+				<br>
+				<input class="in-box" id="cl-lp" placeholder="0x1234..5678" required>
 
-			<br>
-			<br>2. Enter amount to lock
-			<br>
-			<input class="in-box" id="cl-amt" type="number" placeholder="1337.69">
-			<div class="" style="font-family:light_italic">
-				(<span class="" style="font-family:light_italic" id="cl-bal" onclick="$('cl-amt').value=this.innerHTML">0.00</span> in wallet)
-			</div>
+				<br>
+				<br>2. Enter amount to lock
+				<br>
+				<input class="in-box" id="cl-amt" type="number" placeholder="1337.69" required>
+				<div class="" style="display:none;font-family:light_italic">
+					(<span class="" style="font-family:light_italic" id="cl-bal" onclick="$('cl-amt').value=this.innerHTML">0.00</span> in wallet)
+				</div>
 
-			<br>
-			<br>3. Select date of Expiry
-			<br>
-			<input class="in-box" id="cl-end" type="date">
+				<br>
+				<br>3. Select date of Expiry
+				<br>
+				<input class="in-box" id="cl-end" type="date" required>
 
-			<br>
-			<br>
-			<div class="c2a">
-				<button class="c2a-1 submit equal-gradient" onclick="create()">Create a new eLOCK</button>
-			</div>
+				<br>
+				<br>
+				<div class="c2a">
+					<button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
+				</div>
+			</form>
 		</div>
 
 
+		<br><br><br><br>
+		<br><br><br><br>
 		<div class="">
-			<br><br><br><br>
-			<h3 class="">
-				<span>Your eLOCKS Collection</span>
-			</h3>
+			<div class="h-left">
+				<div>Your eLOCKS Collection</div>
+				<div>Select an eLOCK to manage it.</div>
+			</div>
+			<br><br>
 
 			<div class="coll">
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
+				<div class="grayed">
+					No locks found!<br>
+					<span> 🔐 </span>
 				</div>
 				<div>
 					eLOCK 🔐<br>
@@ -196,7 +145,21 @@
 
 
 		<br><br><br><br>
+		<br><br><br><br>
+		<div class="">
 
+			<div class="h-left">
+				<div>eLOCKS Explorer</div>
+				<div>Discover and Manage eLOCKS Positions</div>
+			</div>
+			<form>
+				<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required>
+				<button type="submit" class="search-btn" onclick="searchNFT($('search-inp').value)">🔍</button>
+			</form>
+
+		</div>
+		<br><br><br><br>
+		<br><br><br><br>
 
 		<br><br>
 		<h2>Powered by Guru Network</h2>
@@ -243,7 +206,7 @@
 
 </body>
 <script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
-<script src="manage.js"></script>
+<script src="index.js"></script>
 <script>
 RPC_URL = "https://rpc.ankr.com/fantom";
 CHAINID = 250;
