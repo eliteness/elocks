@@ -1,244 +1,212 @@
-<!doctype html><html><meta charset="UTF-8">
+<!doctype html>
+<html lang="en">
 <head>
-	<title>eLOCKS : Yield-Paying Liquidity Lockers 🔐</title>
-	<meta name="description" content="Earn Yield on your Locked Liquidity! Powered by Guru Network!">
-	<meta name="keywords" content="eliteness.network">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="https://ftm.guru/icons/lock.svg">
-	<link rel="stylesheet" href="index.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eLOCKS : Yield-Paying Liquidity Lockers 🔐</title>
+    <meta name="description" content="Earn Yield on your Locked Liquidity! Powered by Guru Network!">
+    <meta name="keywords" content="eliteness.network">
+    <link rel="shortcut icon" href="https://ftm.guru/icons/lock.svg">
+    <link rel="stylesheet" href="index.css"/>
 </head>
-
 <body>
 
+    <div id="note" class="overlay">
+        <div class="popup">
+            <a class="close" href="#">&times;</a>
+            <div class="content" id="content1">
+                Welcome!
+            </div>
+        </div>
+    </div>
 
-	<div id="note" class="overlay">
-		<div class="popup">
-			<a class="close" href="#">&times;</a>
-			<div class="content" id="content1">
-				w31c0m3 fren!<br>trade well :)
-			</div>
-		</div>
-	</div>
+    <div class="topnav">
+        <div class="topnav-left">
+            <a href="https://eliteness.network/elocks">
+                <img src="https://ftm.guru/icons/64.png" alt="Logo" height="32px">
+            </a>
+            <a href="https://eliteness.network">eliteness.network</a>
+        </div>
+        <div class="topnav-right">
+            <p id="p_cw">
+                <span id="cw" onclick="cw()"><span id="cw_og">Connect wallet</span></span>
+            </p>
+        </div>
+    </div>
 
-	<div class="topnav">
-		<div align="left">
-			<a href="https://eliteness.network/elocks">
-				<img src="https://ftm.guru/icons/64.png" style="vertical-align: middle;" height="32px">
-			</a>
-			<a href="https://eliteness.network">
-				eliteness.network
-			</a>
-		</div>
-		<div align="right">
-			<p id="p_cw"><span id="cw" onclick="cw()">Hello 👋 <span id="cw_og">Connect wallet!</span></p>
-		</div>
-		<div align="left" class="topnav-mkts" id="topnav-mkts">
-		</div>
-	</div>
-	<div class="subnav" style="display:none">
-		<div class="subnav-link"><a href="#a-trade">Trade</a></div>
-		<div class="subnav-link"><a href="#a-order">Orderbook</a></div>
-		<div class="subnav-link"><a href="#a-addlp">Liquidity</a></div>
-		<div class="subnav-link"><a href="#a-posit">Positions</a></div>
-		<div class="subnav-link"><a href="https://eliteness.network/fertilizer">Farm & Earn</a></div>
-	</div>
+    <div class="subnav" style="display:none">
+        <div class="subnav-link"><a href="#a-trade">Trade</a></div>
+        <div class="subnav-link"><a href="#a-order">Orderbook</a></div>
+        <div class="subnav-link"><a href="#a-addlp">Liquidity</a></div>
+        <div class="subnav-link"><a href="#a-posit">Positions</a></div>
+        <div class="subnav-link"><a href="https://eliteness.network/fertilizer">Farm & Earn</a></div>
+    </div>
 
+    <div id="main-area">
+        <div class="headline">
+            <div class="headline-keyword">eLOCKS</div>
+            Unlock Yields from Locked Liquidity!
+        </div>
 
-	<div id="main-area">
+        <!-- <div class="page-heading">
+            <img src="https://ftm.guru/icons/lock.svg" alt="Lock Icon"> 
+            <a href="https://eliteness.network/elocks">eLOCKS</a>
+            ≻ <a>Overview</a>
+        </div> -->
 
-		<div class="headline">
-			<div class="headline-keyword">eLOCKS</div>
-			Unlock Yields from Locked Liquidity!
-		</div>
+        <div class="topstats">
+            <div class="topstat">
+                <div id="topstat-total">5,678 eLOCKS</div>
+                <div>Total Financial NFTs Minted</div>
+            </div>
+            <div class="topstat">
+                <div id="topstat-total">$1,337,000</div>
+                <div>Total Value of Locked Liquidity</div>
+            </div>
+            <div class="topstat">
+                <div id="topstat-total">7x Partners</div>
+                <div>Fantom Sonic Ecosystem Integrations</div>
+            </div>
+        </div>
 
+        <!-- Tab Navigation -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Create')">Create eLOCK</button>
+            <button class="tablinks" onclick="openTab(event, 'Manage')">Manage eLOCK</button>
+        </div>
 
-		<br><br>
+        <!-- Tab content -->
+        <div id="Create" class="tabcontent">
+            <div class="c2a">
+                <form>
+                    <h2>Create eLOCK</h2>
+                    <div class="form-item-container">
+                        <label for="cl-lp">1. Choose the Pool</label>
+                        <input class="in-box" id="cl-lp" placeholder="0x1234..5678" required>
+                    </div>
+                    <div class="form-item-container">
+                        <label for="cl-amt">2. Enter amount to lock</label>
+                        <input class="in-box" id="cl-amt" type="number" placeholder="1337.69" required>
+                    </div>
+                    <div class="wallet-balance" style="display:none;">
+                        (<span id="cl-bal" onclick="document.getElementById('cl-amt').value=this.innerHTML">0.00</span> in wallet)
+                    </div>
+                    <div class="form-item-container">
+                        <label for="cl-end">3. Select date of Expiry</label>
+                        <input class="in-box" id="cl-end" type="date" required>
+                    </div>
+                    <div class="c2a">
+                        <button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-		<div class="page-heading">
-			<img src="https://ftm.guru/icons/lock.svg"> <a href="https://eliteness.network/elocks">eLOCKS</a>
-			≻ <a>Overview</a>
-		</div>
-
-
-		<br><br>
-
-		<div class="topstats">
-			<div class="topstat">
-				<div id="topstat-total">5,678 eLOCKS</div>
-				<div>Total Financial NFTs Minted</div>
-			</div>
-			<div class="topstat">
-				<div id="topstat-total">$1,337,000</div>
-				<div>Total Value of Locked Liquidity</div>
-			</div>
-			<div class="topstat">
-				<div id="topstat-total">7x Partners</div>
-				<div>Fantom Sonic Ecosystem Integrations</div>
-			</div>
-		</div>
-
-
-
-		<div class="c2a">
-			<form>
-
-				<br>
-				<br>
-				<h3 class="">
-					<span>Getting started is so easy!</span>
-				</h3>
-
-				<br>1. Choose the Pool
-				<br>
-				<input class="in-box" id="cl-lp" placeholder="0x1234..5678" required>
-
-				<br>
-				<br>2. Enter amount to lock
-				<br>
-				<input class="in-box" id="cl-amt" type="number" placeholder="1337.69" required>
-				<div class="" style="display:none;font-family:light_italic">
-					(<span class="" style="font-family:light_italic" id="cl-bal" onclick="$('cl-amt').value=this.innerHTML">0.00</span> in wallet)
+        <div id="Manage" class="tabcontent">
+            <div class="collection">
+                <div class="h-left">
+                    <div><h2>Discover and Manage eLOCK Positions</h2></div>
+                </div>
+				<div class="explorer">
+					<form>
+						<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required>
+						<button type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)">🔍</button>
+					</form>
 				</div>
+                <div class="coll">
+                    <div class="grayed">
+                        No locks found!<br><span>🔐</span>
+                    </div>
+                    <div>
+                        eLOCK 🔐<br><span>#456</span>
+                    </div>
+                    <div>
+                        eLOCK 🔐<br><span>#456</span>
+                    </div>
+                    <div>
+                        eLOCK 🔐<br><span>#456</span>
+                    </div>
+                </div>
+            </div>
 
-				<br>
-				<br>3. Select date of Expiry
-				<br>
-				<input class="in-box" id="cl-end" type="date" required>
+        </div>
+		<footer>
+        <h2>Powered by Guru Network</h2>
+        <div class="social">
+            <a target="_blank" href="https://discord.gg/QpyfMarNrV"><img src="https://ftm.guru/icons/discord.svg" alt="Discord"></a>
+            <a target="_blank" href="https://twitter.com/FTM1337"><img src="https://ftm.guru/icons/twitter.svg" alt="Twitter"></a>
+            <a target="_blank" href="https://dune.com/eliteness"><img src="https://ftm.guru/icons/dune.svg" alt="Dune"></a>
+            <a target="_blank" href="https://defillama.com/protocol/guru-network-dao"><img src="https://ftm.guru/icons/defillama.svg" alt="Defillama"></a>
+            <a target="_blank" href="https://coinmarketcap.com/currencies/elite-1337"><img src="https://ftm.guru/icons/cmc.svg" alt="CoinMarketCap"></a>
+            <a target="_blank" href="https://ftm.guru/docs"><img src="https://ftm.guru/icons/docs.svg" alt="Docs"></a>
+        </div>
+	</footer>
+    </div>
 
-				<br>
-				<br>
-				<div class="c2a">
-					<button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
-				</div>
-			</form>
-		</div>
+    <!-- Ignore Below Block : Dev Logs -->
+    <div style="display:none">
+        <span id="cw_m"></span>
+        <div id="connect">
+            Please connect your web3 wallet.
+            <button onclick="cw()" id="btn-connect">Connect</button>
+        </div>
+        <div id="switch">
+            <b id="btn-switch" onclick="cw()">
+                <img src="img/wallet.svg" width="24px" alt="Wallet Icon">
+                <span id="cw"></span>
+            </b>
+            <div>Balance: <b id="usb-mtv">?</b> USDC</div>
+            <span>Wallet at Fantom Opera. <a href="index.html" style="color:aqua;">Change?</a></span>
+        </div>
+    </div>
+    <!-- Ignore Above Block : Dev Logs -->
 
+    <script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
+    <script src="index.js"></script>
+    <script>
+        const RPC_URL = "https://rpc.ankr.com/fantom";
+        const CHAINID = 250;
+        const CHAIN_NAME = "Fantom Opera";
+        const CHAIN_GAS = "FTM";
+        const DECIMAL = 18;
+        const EXPLORE = "https://ftmscan.com/";
+        const EXPLORT = EXPLORE + "tx/";
+        const EXPLORA = EXPLORE + "address/";
+        const TVLGURU = "0x0786c3a78f5133f08c1c70953b8b10376bc6dcad";
+        const NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        const NATIVE_NAME = "FTM";
+        const NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
+        const BASE = "0x6E3e180b1C5742FC445F0bbdaB7Aa7b902560630";
+        const BASE_NAME = "MLP";
+        const BASE_LOGO = "https://ftm.guru/icons/morphexmlp.png";
+        const WRAP = "0x1559eaee5d7194681a72236f2635263009ec7204";
+        const WRAP_NAME = "eliteMorphexMLP";
+        const WRAP_LOGO = "https://ftm.guru/icons/eliteMorphexMLP.png";
+        const MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
+        const SMART_MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
+        const FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
+        const TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
+        const TEARNED_LOGO = ["https://ftm.guru/icons/equal.png"];
+        const TEARNED_NAME = ["EQUAL"];
+        const VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
 
-		<br><br><br><br>
-		<br><br><br><br>
-		<div class="">
-			<div class="h-left">
-				<div>Your eLOCKS Collection</div>
-				<div>Select an eLOCK to manage it.</div>
-			</div>
-			<br><br>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
 
-			<div class="coll">
-				<div class="grayed">
-					No locks found!<br>
-					<span> 🔐 </span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-				<div>
-					eLOCK 🔐<br>
-					<span>#456</span>
-				</div>
-			</div>
-		</div>
-
-
-		<br><br><br><br>
-		<br><br><br><br>
-		<div class="">
-
-			<div class="h-left">
-				<div>eLOCKS Explorer</div>
-				<div>Discover and Manage eLOCKS Positions</div>
-			</div>
-			<form>
-				<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required>
-				<button type="submit" class="search-btn" onclick="searchNFT($('search-inp').value)">🔍</button>
-			</form>
-
-		</div>
-		<br><br><br><br>
-		<br><br><br><br>
-
-		<br><br>
-		<h2>Powered by Guru Network</h2>
-		<div style="display:none" style="font-size:4em" align="center">
-			<img src="https://ftm.guru/icons/1f9be.svg" height="64px">, <img src="https://ftm.guru/icons/1f680.svg" height="64px">
-		</div>
-		<div class="social">
-			<a target="_blank" href="https://discord.gg/QpyfMarNrV"><img src="https://ftm.guru/icons/discord.svg"></a>
-			<a target="_blank" href="https://twitter.com/FTM1337"><img src="https://ftm.guru/icons/twitter.svg"></a>
-			<a target="_blank" href="https://dune.com/eliteness"><img src="https://ftm.guru/icons/dune.svg"></a>
-			<a target="_blank" href="https://defillama.com/protocol/guru-network-dao"><img src="https://ftm.guru/icons/defillama.svg"></a>
-			<a target="_blank" href="https://coinmarketcap.com/currencies/elite-1337"><img src="https://ftm.guru/icons/cmc.svg"></a>
-			<a target="_blank" href="https://ftm.guru/docs"><img src="https://ftm.guru/icons/docs.svg"></a>
-		</div>
-		<br><br>
-
-
-
-	</div>
-
-
-
-
-
-
-<!-- IGNORE BELOW BLOCK : DEV LOGS -->
-		<div style="display:none">
-		<span id="cw_m"></span>
-		<div id="connect">
-			Please connect your web3 wallet.
-			<br><br>
-			<button onclick="cw()" id="btn-connect">Connect</button>
-		</div>
-		<div id="switch">
-			<b id="btn-switch" onclick="cw()">
-				<img src="img/wallet.svg" width="24px" style="position:relative;top:4px">
-				<span id="cw"></span>
-			</b>
-			<br>Balance: <b style="font-family:bold" id="usb-mtv">?</b> <img class="imgmtv" src="https://ftm.guru/icons/eth.svg" width="20px" style="position:relative;top:4px">USDC<br>
-			<span style="font-size:0.9em">Wallet at <img class="imgmtv" src="https://ftm.guru/icons/ftm.svg" width="20px" style="position:relative;top:4px">Fantom Opera. <a href="index.html" style="color:aqua;font-family:bold">Change?</a></span>
-		</div>
-	</div>
-<!-- IGNORE ABOVE BLOCK : DEV LOGS -->
-
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementsByClassName('tablinks')[0].click();
+        });
+    </script>
 </body>
-<script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
-<script src="index.js"></script>
-<script>
-RPC_URL = "https://rpc.ankr.com/fantom";
-CHAINID = 250;
-CHAIN_NAME = "Fantom Opera";
-CHAIN_GAS = "FTM";
-DECIMAL = 18;
-EXPLORE = "https://ftmscan.com/";
-EXPLORT = EXPLORE + "tx/";
-EXPLORA = EXPLORE + "address/";
-TVLGURU = "0x0786c3a78f5133f08c1c70953b8b10376bc6dcad";
-NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
-NATIVE_NAME = "FTM";
-NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
-
-BASE = "0x6E3e180b1C5742FC445F0bbdaB7Aa7b902560630";
-BASE_NAME = "MLP";
-BASE_LOGO = "https://ftm.guru/icons/morphexmlp.png";
-
-WRAP = "0x1559eaee5d7194681a72236f2635263009ec7204";
-WRAP_NAME = "eliteMorphexMLP";
-WRAP_LOGO = "https://ftm.guru/icons/eliteMorphexMLP.png";
-
-MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-SMART_MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-
-FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
-TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
-TEARNED_LOGO = ["https://ftm.guru/icons/equal.png"];
-TEARNED_NAME = ["EQUAL"];
-VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
-</script>
-<script>
-
-</script>
 </html>
