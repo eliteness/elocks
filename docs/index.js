@@ -10,6 +10,23 @@ window.addEventListener('load',async function()
 }, false);
 
 
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementsByClassName('tablinks')[0].click();
+});
 
 
 async function basetrip()
@@ -181,6 +198,14 @@ async function dexstats() {
 	$("cl-end").max = (new Date( Date.now() + (86400e3*365*4) )).toISOString().split("T")[0];
 	$("cl-end").value=(new Date( Date.now() + (86400e3) )).toISOString().split("T")[0];
 
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, LPABI, provider);
+
+	_dsd = await Promise.all([
+		_ELOCKS.totalSupply(),
+	])
+
+	$("topstat-total").innerHTML = Number(_dsd[0]) + " 🔐 eLOCKS";
+
 	return;
 	_BASE = new ethers.Contract(BASE, LPABI, provider);
 	_WRAP = new ethers.Contract(WRAP, LPABI, provider);
@@ -231,7 +256,7 @@ async function createLock() {
 
 	/// Business end
 	_BASE = new ethers.Contract(_LP, LPABI, signer);
-	_SMART_MANAGER = new ethers.Contract(SMART_MANAGER, LRABI, signer);
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ["function createLockWithReferralFor(address _lp, uint _amt, uint _exp, address _to, tuple(address agent, uint percent) _ref)"], signer);
 
 
 	al = await Promise.all([
@@ -333,7 +358,6 @@ async function createLock_check() {
 			<br><br>
 			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like!
 			<br><br>
-			<br><br>
 			<button class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</button><br>
 			<button class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</button>
 		`);
@@ -341,9 +365,26 @@ async function createLock_check() {
 
 	else if(_END.valueOf() < Date.now() + 100e3 ) {
 		notice(`
-			<h3>Very long Lock period!</h3>
-			Your selected unlock date is ${new Date(_END)}, which is more than 6 months into the future!
+			<h3>Lock period has passed!</h3>
+			Your selected unlock date is ${new Date(_END)}.
+			<br>All locks must expire in the future!
 			<br><br>
+		`);
+	}
+
+
+	else if(_END.valueOf() > Date.now() + 100e3) {
+		notice(`
+			<h3>Creating a new eLOCK!</h3>
+			Your selected unlock date is ${new Date(_END)}. Please make sure this is the desired lockup time. You wont be able to reduce this later!
+			<br><br>
+			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for smaller periods and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to the new Sonic chain when the time comes in the next few month. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards without any fee if you setup your eLOCKS NFT to allow you to claim your Rewards even after the transfer.
+			<br><i>(Note: Only the Current holder of an eLOCK can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder.)</i>
+			<br><br>
+			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like!
+			<br><br>
+			<button class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</button><br>
+			<button class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</button>
 		`);
 	}
 

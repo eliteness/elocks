@@ -49,22 +49,22 @@
         </div>
 
         <!-- <div class="page-heading">
-            <img src="https://ftm.guru/icons/lock.svg" alt="Lock Icon"> 
+            <img src="https://ftm.guru/icons/lock.svg" alt="Lock Icon">
             <a href="https://eliteness.network/elocks">eLOCKS</a>
             ≻ <a>Overview</a>
         </div> -->
 
         <div class="topstats">
             <div class="topstat">
-                <div id="topstat-total">5,678 eLOCKS</div>
+                <div id="topstat-total">... eLOCKS</div>
                 <div>Total Financial NFTs Minted</div>
             </div>
             <div class="topstat">
-                <div id="topstat-total">$1,337,000</div>
+                <div id="topstat-total">$1,000+</div>
                 <div>Total Value of Locked Liquidity</div>
             </div>
             <div class="topstat">
-                <div id="topstat-total">7x Partners</div>
+                <div id="topstat-total">4x Partners</div>
                 <div>Fantom Sonic Ecosystem Integrations</div>
             </div>
         </div>
@@ -115,7 +115,7 @@
 				</div>
                 <div class="coll">
                     <div class="grayed">
-                        No locks found!<br><span>🔐</span> 
+                        No locks found!<br><span>🔐</span>
                     </div>
                     <div>
                         eLOCK 🔐<br><span>#456</span>
@@ -164,49 +164,34 @@
     <script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
     <script src="index.js"></script>
     <script>
-        const RPC_URL = "https://rpc.ankr.com/fantom";
-        const CHAINID = 250;
-        const CHAIN_NAME = "Fantom Opera";
-        const CHAIN_GAS = "FTM";
-        const DECIMAL = 18;
-        const EXPLORE = "https://ftmscan.com/";
-        const EXPLORT = EXPLORE + "tx/";
-        const EXPLORA = EXPLORE + "address/";
-        const TVLGURU = "0x0786c3a78f5133f08c1c70953b8b10376bc6dcad";
-        const NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
-        const NATIVE_NAME = "FTM";
-        const NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
-        const BASE = "0x6E3e180b1C5742FC445F0bbdaB7Aa7b902560630";
-        const BASE_NAME = "MLP";
-        const BASE_LOGO = "https://ftm.guru/icons/morphexmlp.png";
-        const WRAP = "0x1559eaee5d7194681a72236f2635263009ec7204";
-        const WRAP_NAME = "eliteMorphexMLP";
-        const WRAP_LOGO = "https://ftm.guru/icons/eliteMorphexMLP.png";
-        const MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-        const SMART_MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-        const FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
-        const TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
-        const TEARNED_LOGO = ["https://ftm.guru/icons/equal.png"];
-        const TEARNED_NAME = ["EQUAL"];
-        const VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
+        RPC_URL = "https://rpc.ankr.com/fantom";
+        CHAINID = 250;
+        CHAIN_NAME = "Fantom Opera";
+        CHAIN_GAS = "FTM";
+        DECIMAL = 18;
+        EXPLORE = "https://ftmscan.com/";
+        EXPLORT = EXPLORE + "tx/";
+        EXPLORA = EXPLORE + "address/";
+        TVLGURU = "0x0786c3a78f5133f08c1c70953b8b10376bc6dcad";
+        NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+        NATIVE_NAME = "FTM";
+        NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
+        BASE = "0x6E3e180b1C5742FC445F0bbdaB7Aa7b902560630";
+        BASE_NAME = "MLP";
+        BASE_LOGO = "https://ftm.guru/icons/morphexmlp.png";
+        WRAP = "0x1559eaee5d7194681a72236f2635263009ec7204";
+        WRAP_NAME = "eliteMorphexMLP";
+        WRAP_LOGO = "https://ftm.guru/icons/eliteMorphexMLP.png";
+        MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
+        SMART_MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
+        FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
+        TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
+        TEARNED_LOGO = ["https://ftm.guru/icons/equal.png"];
+        TEARNED_NAME = ["EQUAL"];
+        VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
 
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
+        LOCKER_ROOM = "0x065717ffe068b3dc917e5bc26634f8bcd37bd191"
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementsByClassName('tablinks')[0].click();
-        });
     </script>
 </body>
 </html>

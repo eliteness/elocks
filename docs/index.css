@@ -197,7 +197,7 @@ footer{
 	background: -webkit-linear-gradient(90deg, #0ff, #fff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    
+
     font-size: 1.25em;
     font-weight: bold;
 	margin-bottom:20px;
@@ -344,6 +344,29 @@ footer{
     margin: 4px;
 }
 
+
+button.submit {
+	padding: 10px 30px;
+	border-radius: 30px;
+	font-weight: bold;
+	color: white;
+	width: 100%;
+	margin: 5px auto ;
+	padding: 6px;
+	font-size: 0.75em;
+}
+button.submit:hover{
+	box-shadow: 0px 2px 2px #0ff
+}
+button.submit:active{
+	position: relative;
+	top:2px;
+}
+.grayed {
+	color:#fff;
+	background:linear-gradient(#777,#111) !important;
+}
+
 @media (max-width: 700px) {
     .popup {
         width: 90%;
@@ -360,4 +383,10 @@ footer{
     .collection .coll div {
         min-width: 100%;
     }
+
+	button.submit {
+		margin: 5px auto;
+		padding: 10px;
+		font-size: 1em;
+	}
 }
