@@ -190,7 +190,7 @@ function notice(c) {
 }
 
 
-LPABI = ["function balanceOf(address) public view returns(uint)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
+LPABI = ["function balanceOf(address) public view returns(uint)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
 
 async function dexstats() {
 
@@ -260,7 +260,7 @@ async function createLock() {
 
 
 	al = await Promise.all([
-		_BASE.allowance(window.ethereum.selectedAddress, SMART_MANAGER),
+		_BASE.allowance(window.ethereum.selectedAddress, LOCKER_ROOM),
 		_BASE.balanceOf(window.ethereum.selectedAddress),
 		_BASE.symbol()
 	]);
@@ -270,7 +270,7 @@ async function createLock() {
 	if(Number(_oamt)>Number(al[1])) {
 		notice(`
 			<h2>${BASE_NAME}<br>Insufficient Balance!</h2>
-			<h3>Desired Amount:</h3>${_oamt/1e18}<br>
+			<h3>Desired Amount:</h3>${Number(_oamt)/1e18}<br>
 			<h3>Actual Balance:</h3>${al[1]/1e18}<br><br>
 			<b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.
 		`);
@@ -283,7 +283,7 @@ async function createLock() {
 			Please grant ${BASE_NAME} allowance.<br><br>
 			<h4><u><i>Confirm this transaction in your wallet!</i></u></h4>
 		`);
-		let _tr = await _BASE.approve(SMART_MANAGER,_oamt);
+		let _tr = await _BASE.approve(LOCKER_ROOM,_oamt);
 		console.log(_tr);
 		notice(`
 			<h3>Submitting Approval Transaction!</h3>
@@ -308,7 +308,7 @@ async function createLock() {
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _SMART_MANAGER.deposit(_oamt);
+	let _tr = await _ELOCKS.createLockWithReferral(_LP,_oamt,_END,(window.ethereum.selectedAddress,{AGENT,PERCENT});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
@@ -337,6 +337,16 @@ async function createLock_check() {
 	if(!ethers.utils.isAddress(_LP)){
 		notice(`Incorrect LP Address Input!<br>${_LP}`);
 		return;
+	}
+	else{
+		if(await (new ethers.Contract(FACTORY,["function isPair(address) public view returns(bool)"],provider)).isPair(_LP)) {
+			notice(`Equalizer Pair detected!`);
+		}
+		else {
+			notice(`Unknown LP Address Input!<br>${_LP} is not an Equalizer Pair!`);
+			return;
+		}
+
 	}
 
 	_oamt = $("cl-amt").value;

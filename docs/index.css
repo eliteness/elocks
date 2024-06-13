@@ -50,12 +50,12 @@
 
 .tab button:hover {
     background-color: #4567;
-    color: black;
+    color: #3ff;
 }
 
 .tab button.active {
     background-color: #4567;
-    color: white;
+    color: #3ff;
 }
 
 .tabcontent {
