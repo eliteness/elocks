@@ -308,7 +308,7 @@ async function createLock() {
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _ELOCKS.createLockWithReferral(_LP,_oamt,_END,(window.ethereum.selectedAddress,{AGENT,PERCENT});
+	let _tr = await _ELOCKS.createLockWithReferral(_LP,_oamt,_END,window.ethereum.selectedAddress,{AGENT,PERCENT});
 	console.log(_tr);
 	notice(`
 		<h3>Order Submitted!</h3>
