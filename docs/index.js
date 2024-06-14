@@ -190,7 +190,7 @@ function notice(c) {
 }
 
 
-LPABI = ["function balanceOf(address) public view returns(uint)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
+LPABI = ["function balanceOf(address) public view returns(uint)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function name() public view returns(string)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
 
 ELOCKERABI = [ { "inputs": [ { "internalType": "contract IEqualocker", "name": "_design", "type": "address" }, { "internalType": "contract IArt", "name": "_art", "type": "address" }, { "internalType": "contract IVoter", "name": "_vtr", "type": "address" } ], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "approved", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" } ], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "operator", "type": "address" }, { "indexed": false, "internalType": "bool", "name": "approved", "type": "bool" } ], "name": "ApprovalForAll", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "by", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "address", "name": "pool", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "expiry", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "agent", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "percent", "type": "uint256" } ], "name": "LockCreated", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": true, "internalType": "uint256", "name": "tokenId", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "inputs": [], "name": "AprGuru", "outputs": [ { "internalType": "contract IAprGuru", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "TvlGuru", "outputs": [ { "internalType": "contract ITvlGuru", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "admin", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_approved", "type": "address" }, { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "art", "outputs": [ { "internalType": "contract IArt", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_owner", "type": "address" } ], "name": "balanceOf", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "contract IPair", "name": "_lp", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }, { "internalType": "uint256", "name": "_exp", "type": "uint256" } ], "name": "createLock", "outputs": [ { "internalType": "contract IEqualocker", "name": "_locker", "type": "address" }, { "internalType": "uint256", "name": "_ID", "type": "uint256" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IPair", "name": "_lp", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }, { "internalType": "uint256", "name": "_exp", "type": "uint256" }, { "internalType": "address", "name": "_to", "type": "address" } ], "name": "createLockFor", "outputs": [ { "internalType": "contract IEqualocker", "name": "_locker", "type": "address" }, { "internalType": "uint256", "name": "_ID", "type": "uint256" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IPair", "name": "_lp", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }, { "internalType": "uint256", "name": "_exp", "type": "uint256" }, { "components": [ { "internalType": "address", "name": "agent", "type": "address" }, { "internalType": "uint256", "name": "percent", "type": "uint256" } ], "internalType": "struct IEqualocker.Referral", "name": "_ref", "type": "tuple" } ], "name": "createLockWithReferral", "outputs": [ { "internalType": "contract IEqualocker", "name": "_locker", "type": "address" }, { "internalType": "uint256", "name": "_ID", "type": "uint256" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IPair", "name": "_lp", "type": "address" }, { "internalType": "uint256", "name": "_amt", "type": "uint256" }, { "internalType": "uint256", "name": "_exp", "type": "uint256" }, { "internalType": "address", "name": "_to", "type": "address" }, { "components": [ { "internalType": "address", "name": "agent", "type": "address" }, { "internalType": "uint256", "name": "percent", "type": "uint256" } ], "internalType": "struct IEqualocker.Referral", "name": "_ref", "type": "tuple" } ], "name": "createLockWithReferralFor", "outputs": [ { "internalType": "contract IEqualocker", "name": "_locker", "type": "address" }, { "internalType": "uint256", "name": "_ID", "type": "uint256" } ], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "design", "outputs": [ { "internalType": "contract IEqualocker", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "factory", "outputs": [ { "internalType": "contract IFactory", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "feeSynthesizer", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "getApproved", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_owner", "type": "address" }, { "internalType": "address", "name": "_operator", "type": "address" } ], "name": "isApprovedForAll", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_spender", "type": "address" }, { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "isApprovedOrOwner", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_lockID", "type": "uint256" } ], "name": "lockInfo", "outputs": [ { "internalType": "address[5]", "name": "", "type": "address[5]" }, { "internalType": "uint256[6]", "name": "", "type": "uint256[6]" }, { "internalType": "uint256[]", "name": "", "type": "uint256[]" }, { "internalType": "contract IERC20[]", "name": "_rt", "type": "address[]" }, { "internalType": "uint256[]", "name": "_ra", "type": "uint256[]" }, { "components": [ { "internalType": "address", "name": "agent", "type": "address" }, { "internalType": "uint256", "name": "percent", "type": "uint256" } ], "internalType": "struct IEqualocker.Referral", "name": "", "type": "tuple" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_lockID", "type": "uint256" } ], "name": "lockedAssets", "outputs": [ { "internalType": "contract IPair", "name": "", "type": "address" }, { "internalType": "uint256", "name": "", "type": "uint256" }, { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "lockers", "outputs": [ { "internalType": "contract IEqualocker", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "pure", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "ownerOf", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "ownership_change", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "referrals", "outputs": [ { "internalType": "address", "name": "agent", "type": "address" }, { "internalType": "uint256", "name": "percent", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_from", "type": "address" }, { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_from", "type": "address" }, { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_tokenId", "type": "uint256" }, { "internalType": "bytes", "name": "_data", "type": "bytes" } ], "name": "safeTransferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_new_admin", "type": "address" } ], "name": "setAdmin", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_operator", "type": "address" }, { "internalType": "bool", "name": "_approved", "type": "bool" } ], "name": "setApprovalForAll", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IAprGuru", "name": "_a", "type": "address" } ], "name": "setAprGuru", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IArt", "name": "_art", "type": "address" } ], "name": "setArt", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract IEqualocker", "name": "_design", "type": "address" } ], "name": "setDesign", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_fs", "type": "address" } ], "name": "setFeeSynthesizer", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "contract ITvlGuru", "name": "_t", "type": "address" } ], "name": "setTvlGuru", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "bytes4", "name": "_interfaceID", "type": "bytes4" } ], "name": "supportsInterface", "outputs": [ { "internalType": "bool", "name": "", "type": "bool" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "pure", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_owner", "type": "address" }, { "internalType": "uint256", "name": "_tokenIndex", "type": "uint256" } ], "name": "tokenOfOwnerByIndex", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "tokenURI", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_usr", "type": "address" } ], "name": "tokensOfOwner", "outputs": [ { "internalType": "uint256[]", "name": "", "type": "uint256[]" } ], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalSupply", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function" }, { "inputs": [ { "internalType": "address", "name": "_from", "type": "address" }, { "internalType": "address", "name": "_to", "type": "address" }, { "internalType": "uint256", "name": "_tokenId", "type": "uint256" } ], "name": "transferFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "voter", "outputs": [ { "internalType": "contract IVoter", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function" } ];
 
@@ -234,7 +234,7 @@ async function dexstats() {
 }
 
 async function gubs() {
-	_ELOCKS = new ethers.Contract(LOCKER_ROOM, "function tokensOfOwner(address _usr) public view returns (uint[] memory)", provider);
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, provider);
 
 	_ubs = await Promise.all([
 		_ELOCKS.tokensOfOwner(window.ethereum.selectedAddress)
@@ -282,7 +282,7 @@ async function createLock() {
 
 	/// Business end
 	_BASE = new ethers.Contract(_LP, LPABI, signer);
-	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ["function createLockWithReferralFor(address _lp, uint _amt, uint _exp, address _to, tuple(address agent, uint percent) _ref)"], signer);
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, signer);
 
 
 	al = await Promise.all([
@@ -439,19 +439,133 @@ async function searchNFT(_NFTID) {
 
 	try{
 		_li = await _ELOCKS.lockInfo(_NFTID);
-		//notice(JSON.stringify(_li))
-		/*
+	//notice(JSON.stringify(_li))
+	/*function lockInfo(uint _lockID) public view returns (
 		address[5] memory,
 		uint[6] memory,
 		uint[] memory,
 		IERC20[] memory _rt,
 		uint[] memory _ra,
 		IEqualocker.Referral memory
+	) {
+
+		IEqualocker _locker = lockers[_lockID];
+
+		address[5] memory _locker_owner_earner_pool_gauge = [
+			address(_locker),
+			idToOwner[_lockID],
+			_locker.earner(),
+			address(_locker.pool()),
+			address(_locker.gauge())
+		];
+
+		uint[6] memory _total_expiry_apr_tvl_claimf0_claimf1 = [
+			_locker.totalSupply(),
+			_locker.expiry(),
+			_locker.apr(),
+			_locker.tvl(),
+			0,
+			0
+		];
+		(_total_expiry_apr_tvl_claimf0_claimf1[4], _total_expiry_apr_tvl_claimf0_claimf1[5]) = _locker.claimableFees();
+
+		(_rt, _ra) = _locker.allEarnings();
+
+		return (
+			_locker_owner_earner_pool_gauge,
+			_total_expiry_apr_tvl_claimf0_claimf1,
+			_locker.claimableRewards(),
+			_rt,
+			_ra,
+			_locker.referral()
+		);
+	}
 		*/
+		_ens = await Promise.all([
+			(new ethers.Contract(_li[0][0],LPABI,provider)).name(),
+			(new ethers.Contract(_li[0][0],LPABI,provider)).symbol(),
+		]);
+
+		LD = {
+			locker:		_li[0][0] ,
+			owner:		_li[0][1] ,
+			earner:		_li[0][2] ,
+			pool:		_li[0][3] ,
+			gauge:		_li[0][4] ,
+
+			total:		Number(_li[1][0])/1e18 ,
+			expiry:		Number(_li[1][1])*1000 ,
+			apr:		Number(_li[1][2])/1e18 ,
+			tvl:		Number(_li[1][3])/1e18 ,
+			cfees0:		Number(_li[1][4])/1e18 ,
+			cfees1:		Number(_li[1][5])/1e18 ,
+
+			crewards:	_li[2].map(i=>Number(i)/1e18) ,
+			trewards:	_li[3] ,
+			arewards:	_li[4].map(i=>Number(i)/1e18) ,
+
+			refagent:	_li[5][0],
+			refpercent:	Number(_li[5][1])/10,
+
+			name:		_ens[0] ,
+			symbol:		_ens[1] ,
+			poolType:	_ens[1].split("-")[0] ,
+			symbol0:	_ens[1].split("-")[1].split("/")[0] ,
+			symbol1:	_ens[1].split("-")[1].split("/")[1] ,
+		}
+
 
 		$("spotlight").innerHTML = `
-			<button> ok </button>
+			<h3>${ LD.symbol }</h3>
+			${ LD.name }
+			<br>
+
+			<h3>LP Locked till</h3>
+			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
+			<br>
+
+			<h3>Amount Locked</h3>
+			${ LD.total }
+			<br>
+
+
+			<h3>Claimable Fees Rewards</h3>
+			${ LD.cfees0 } ${ LD.symbol0 }
+			<br>${ LD.cfees1 } ${ LD.symbol1 }
+			<br><button class="submit equal-gradient" onclick="LD_claimFees(${JSON.stringify(LD)})"> Claim Fees Rewards </button>
+			<br>
+
+			<h3>Claimable Farming Rewards</h3>
+			${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+			<br><button class="submit equal-gradient" onclick="LD_claimFees(${JSON.stringify(LD)})"> Claim Farming Rewards </button>
+			<br>
+
+			<h3>Related Addresses</h3>
+			<br>Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner.substr(0,10)+"-"+ LD.owner.substr(-8)}</a>
+			<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner.substr(0,10)+"-"+ LD.earner.substr(-8)}</a>
+			<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool.substr(0,10)+"-"+ LD.pool.substr(-8)}</a>
+			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge.substr(0,10)+"-"+ LD.gauge.substr(-8)}</a>
+
 		`;
+
+		/*
+			<br>Quote Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>
+			<br>Base Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>
+			<br>
+
+			<h3>Amount Locked</h3>
+			${ LD.total }
+			<br>
+
+			<h3>Amount Locked</h3>
+			${ LD.total }
+			<br>
+
+			<h3>Amount Locked</h3>
+			${ LD.total }
+			<br>
+		*/
+
 
 	}
 	catch(e){
@@ -461,4 +575,85 @@ async function searchNFT(_NFTID) {
 			<br><br>${JSON.stringify(e)}
 		`);
 	}
+}
+
+async function LD_claimFees(_ld) {
+	_ld = JSON.parse(_ld);
+
+	/// Welcome, anon!
+	notice(`Checking wallet..`);
+	await cw();
+
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKABI, signer);
+
+	notice(`
+		<h3>Claiming Trade Fees</h3>
+		<b>${_ld.name}</b>
+
+		<br>${ _ld.cfees0 } ${ _ld.symbol0 }
+		<br>${ _ld.cfees1 } ${ _ld.symbol1 }
+
+
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.claimFees();
+	console.log(_tr);
+	notice(`
+		<h3>Claiming Trade Fees</h3>
+		<b>${_ld.name}</b>
+
+		<br>${ _ld.cfees0 } ${ _ld.symbol0 }
+		<br>${ _ld.cfees1 } ${ _ld.symbol1 }
+		<br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>Trade Fees Claimed!</h3>
+		<b>${_ld.name}</b>
+
+		<br>${ _ld.cfees0 } ${ _ld.symbol0 }
+		<br>${ _ld.cfees1 } ${ _ld.symbol1 }
+
+		<br><br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+}
+
+async function LD_claimRewards(_ld) {
+	_ld = JSON.parse(_ld);
+
+	/// Welcome, anon!
+	notice(`Checking wallet..`);
+	await cw();
+
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKABI, signer);
+
+	notice(`
+		<h3>Claiming Gauge Farming Rewards</h3>
+		<b>${_ld.name}</b>
+		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.claimFees();
+	console.log(_tr);
+	notice(`
+
+		<h3>Claiming Gauge Farming Rewards</h3>
+		<b>${_ld.name}</b>
+		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>Gauge Farming Rewards Claimed!</h3>
+		<b>${_ld.name}</b>
+
+		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<br><br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
 }

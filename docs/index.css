@@ -254,9 +254,6 @@ footer{
 	width:60%;
 	max-width:500px;
 	margin:auto auto;
-}
-
-.c2a form {
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
@@ -284,6 +281,8 @@ footer{
     color: white;
     cursor: pointer;
     transition: box-shadow 0.3s ease-in-out;
+    width: 60% !important;
+    height: 32px !important;
 }
 
 .c2a button:hover {

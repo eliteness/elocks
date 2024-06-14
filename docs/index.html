@@ -95,9 +95,7 @@
                         <label for="cl-end">3. Select date of Expiry</label>
                         <input class="in-box" id="cl-end" type="date" required>
                     </div>
-                    <div class="c2a">
-                        <button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
-                    </div>
+                    <button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
                 </form>
             </div>
         </div>
@@ -114,19 +112,63 @@
                 </div>
             </div>
 			<div class="c2a">
-  				<form>
-					<div class="explorer">
-                    	<div class="form-item-container">
-							<h2>Search for a NFT by ID</h2>
-							<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required style="font-size:;max-width:50%">
-							<span type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:2em">🔍</span>
-						</div>
+				<div class="explorer">
+                    <div class="form-item-container">
+						<h2>Search for a NFT by ID</h2>
+						<input required class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" style="font-size:;max-width:50%">
+						<span type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:2em;vertical-align: middle;">🔍</span>
 					</div>
-					<div id="spotlight">
+				</div>
+				<div id="spotlight">
+    				<div style="font-family: light !important">
     					<h3>No NFT selected!</h3>
     					<br>Please log in to view your eLOCKS or Search for an eLOCK above.
-    				</div>
-  				</form>
+	    			</div>
+    			</div>
+			</div>
+			<hr><hr>
+			Below is a sample dummy for styling
+			<hr>
+			<div class="c2a">
+				<div class="explorer">
+                    <div class="form-item-container">
+						<h2>Search for a NFT by ID</h2>
+						<input required="" class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" style="font-size:;max-width:50%">
+						<span type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:2em;vertical-align: middle;">🔍</span>
+					</div>
+				</div>
+				<div id="spotlight">
+			<h3>locked:vAMM-EQUAL/HOOPS</h3>
+			Equalocker Locked VolatileV1 AMM - EQUAL/HOOPS 🔐
+			<br>
+
+			<h3>LP Locked till</h3>
+			2024-05-03 08:45:00
+			<br>
+
+			<h3>Amount Locked</h3>
+			1337
+			<br>
+
+
+			<h3>Claimable Fees Rewards</h3>
+			2.6124663349773347 EQUAL
+			<br>8613.688225996302 HOOPS
+			<br><button class="submit equal-gradient" onclick="LD_claimFees(0x89cf6c1A27e7756eB250e1Fc1f07108A0e7D4615)"> Claim Fees Rewards </button>
+			<br>
+
+			<h3>Claimable Farming Rewards</h3>
+			0 EQUAL
+			<br><button class="submit equal-gradient" onclick="LD_claimFees([object Object])"> Claim Farming Rewards </button>
+			<br>
+
+			<h3>Related Addresses</h3>
+			<br>Owner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
+			<br>Earner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
+			<br>Pool : <a href="https://ftmscan.com/address/0xfe02fd5b3F8904e2f4108505bEE7cf91E1D179E4" target="_blank">0xfe02fd5b-E1D179E4</a>
+			<br>Gauge : <a href="https://ftmscan.com/address/0x0000000000000000000000000000000000000000" target="_blank">0x00000000-00000000</a>
+
+		</div>
 			</div>
         </div>
 		<footer>
