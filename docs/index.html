@@ -107,19 +107,27 @@
                 <div class="h-left">
                     <div><h2>Discover and Manage eLOCK Positions</h2></div>
                 </div>
-				<div class="explorer">
-					<form>
-						<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required>
-						<button type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)">🔍</button>
-					</form>
-				</div>
                 <div class="coll" id="coll-list">
                     <div class="grayed">
                         No locks found!<br><span>🔐</span>
                     </div>
                 </div>
             </div>
-
+			<div class="c2a">
+  				<form>
+					<div class="explorer">
+                    	<div class="form-item-container">
+							<h2>Search for a NFT by ID</h2>
+							<input class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" required style="font-size:;max-width:50%">
+							<span type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:2em">🔍</span>
+						</div>
+					</div>
+					<div id="spotlight">
+    					<h3>No NFT selected!</h3>
+    					<br>Please log in to view your eLOCKS or Search for an eLOCK above.
+    				</div>
+  				</form>
+			</div>
         </div>
 		<footer>
         <h2>Powered by Guru Network</h2>
