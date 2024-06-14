@@ -530,14 +530,14 @@ async function searchNFT(_NFTID) {
 
 
 			<h3>Claimable Fees Rewards</h3>
-			${ LD.cfees0 } ${ LD.symbol0 }
-			<br>${ LD.cfees1 } ${ LD.symbol1 }
-			<br><button class="submit equal-gradient" onclick="LD_claimFees(${JSON.stringify(LD)})"> Claim Fees Rewards </button>
+			<br><br>${ _ld.symbol0 }<br>${ _ld.cfees0 }
+			<br><br>${ _ld.symbol1 }<br>${ _ld.cfees1 }
+			<br><br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
 			<br>
 
 			<h3>Claimable Farming Rewards</h3>
 			${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
-			<br><button class="submit equal-gradient" onclick="LD_claimFees(${JSON.stringify(LD)})"> Claim Farming Rewards </button>
+			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 			<br>
 
 			<h3>Related Addresses</h3>
@@ -578,7 +578,7 @@ async function searchNFT(_NFTID) {
 }
 
 async function LD_claimFees(_ld) {
-	_ld = JSON.parse(_ld);
+	_ld = LD; //JSON.parse(_ld);
 
 	/// Welcome, anon!
 	notice(`Checking wallet..`);
@@ -613,8 +613,8 @@ async function LD_claimFees(_ld) {
 		<h3>Trade Fees Claimed!</h3>
 		<b>${_ld.name}</b>
 
-		<br>${ _ld.cfees0 } ${ _ld.symbol0 }
-		<br>${ _ld.cfees1 } ${ _ld.symbol1 }
+		${ _ld.symbol0 }<br>${ _ld.cfees0 }
+		${ _ld.symbol1 }<br>${ _ld.cfees1 }
 
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
@@ -622,7 +622,7 @@ async function LD_claimFees(_ld) {
 }
 
 async function LD_claimRewards(_ld) {
-	_ld = JSON.parse(_ld);
+	_ld = LD; //JSON.parse(_ld);
 
 	/// Welcome, anon!
 	notice(`Checking wallet..`);
@@ -636,7 +636,7 @@ async function LD_claimRewards(_ld) {
 		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
-	let _tr = await _ELOCK.claimFees();
+	let _tr = await _ELOCK.claimRewards();
 	console.log(_tr);
 	notice(`
 
