@@ -203,8 +203,8 @@ async function dexstats() {
 	_dsd = await Promise.all([
 		_ELOCKS.totalSupply(),
 	])
-
-	$("topstat-total").innerHTML = Number(_dsd[0]) + " 🔐 eLOCKS";
+	TOTAL_SUPPLY = Number(_dsd[0]);
+	$("topstat-total").innerHTML = TOTAL_SUPPLY + " 🔐 eLOCKS";
 
 	return;
 	_BASE = new ethers.Contract(BASE, LPABI, provider);
@@ -230,7 +230,29 @@ async function dexstats() {
 }
 
 async function gubs() {
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, "function tokensOfOwner(address _usr) public view returns (uint[] memory)", provider);
 
+	_ubs = await Promise.all([
+		_ELOCKS.tokensOfOwner(window.ethereum.selectedAddress)
+	]);
+
+	$("coll-list").innerHTML = "";
+	if(_ubs[0].length==0) {
+		$("coll-list").innerHTML = `
+            <div class="grayed">
+                No locks found!<br><span>🔐</span>
+            </div>
+        `;
+    }
+    else {
+    	for(i=0;i<_ubs[0].length;i++) {
+    		$("coll-list").innerHTML += `
+				<div onclick="searchNFT(${_ubs[0][i]})">
+					eLOCK 🔐<br><span>${_ubs[0][i]}</span>
+				</div>
+        	`;
+    	}
+	}
 
 	return;
 	_BASE = new ethers.Contract(BASE, LPABI, signer);
@@ -404,4 +426,16 @@ async function createLock_check() {
 
 async function searchNFT(_NFTID) {
 	console.log("looking for ", _NFTID);
+	if(!isFinite(_NFTID) || _NFTID < 1){notice(`Invalid eLOCKS NFT ID!`); return;}
+	_NFTID = Math.floor(_NFTID);
+
+	//if(TOTAL_SUPPLY)
+
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ["function lockInfo(uint _lockID) public view returns (address[5] memory,uint[6] memory,uint[] memory,IERC20[] memory _rt,uint[] memory _ra, tuple(address,uint))"], provider);
+
+	try{
+		_li = await _ELOCKS.lockInfo(_NFTID);
+		notice(JSON.stringify(_li))
+	}
+	catch(e){}
 }
