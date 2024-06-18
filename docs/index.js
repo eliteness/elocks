@@ -548,6 +548,8 @@ async function searchNFT(_NFTID) {
 
 		`;
 
+		window.location="#spotlight";
+
 		/*
 			<br>Quote Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>
 			<br>Base Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>
@@ -584,7 +586,7 @@ async function LD_claimFees(_ld) {
 	notice(`Checking wallet..`);
 	await cw();
 
-	_ELOCK = new ethers.Contract(_ld.locker, ELOCKABI, signer);
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
 
 	notice(`
 		<h3>Claiming Trade Fees</h3>
@@ -628,7 +630,7 @@ async function LD_claimRewards(_ld) {
 	notice(`Checking wallet..`);
 	await cw();
 
-	_ELOCK = new ethers.Contract(_ld.locker, ELOCKABI, signer);
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
 
 	notice(`
 		<h3>Claiming Gauge Farming Rewards</h3>
