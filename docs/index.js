@@ -437,7 +437,7 @@ async function searchNFT(_NFTID) {
 
 	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, provider);
 
-	try{
+	//try{
 		_li = await _ELOCKS.lockInfo(_NFTID);
 	//notice(JSON.stringify(_li))
 	/*function lockInfo(uint _lockID) public view returns (
@@ -518,30 +518,30 @@ async function searchNFT(_NFTID) {
 		$("spotlight").innerHTML = `
 			<h3>${ LD.symbol }</h3>
 			${ LD.name }
-			<br>
+			<br><br>
 
 			<h3>LP Locked till</h3>
 			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
-			<br>
+			<br><br>
 
 			<h3>Amount Locked</h3>
 			${ LD.total }
-			<br>
+			<br><br>
 
 
 			<h3>Claimable Fees Rewards</h3>
-			<br><br>${ _ld.symbol0 }<br>${ _ld.cfees0 }
-			<br><br>${ _ld.symbol1 }<br>${ _ld.cfees1 }
+			${ LD.symbol0 }<br>${ LD.cfees0 }
+			<br><br>${ LD.symbol1 }<br>${ LD.cfees1 }
 			<br><br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
-			<br>
+			<br><br>
 
 			<h3>Claimable Farming Rewards</h3>
 			${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
 			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
-			<br>
+			<br><br>
 
 			<h3>Related Addresses</h3>
-			<br>Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner.substr(0,10)+"-"+ LD.owner.substr(-8)}</a>
+			Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner.substr(0,10)+"-"+ LD.owner.substr(-8)}</a>
 			<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner.substr(0,10)+"-"+ LD.earner.substr(-8)}</a>
 			<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool.substr(0,10)+"-"+ LD.pool.substr(-8)}</a>
 			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge.substr(0,10)+"-"+ LD.gauge.substr(-8)}</a>
@@ -564,7 +564,6 @@ async function searchNFT(_NFTID) {
 			<h3>Amount Locked</h3>
 			${ LD.total }
 			<br>
-		*/
 
 
 	}
@@ -575,6 +574,7 @@ async function searchNFT(_NFTID) {
 			<br><br>${JSON.stringify(e)}
 		`);
 	}
+		*/
 }
 
 async function LD_claimFees(_ld) {
