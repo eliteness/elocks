@@ -507,8 +507,8 @@ async function searchNFT(_NFTID) {
 			symbol1:	_li[8][3] ,
 
 			/// DERIVED DATA
-			amt0:		Number(_li[1][8])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10])/1e18 *  (Number(_li[1][6])/1e18)/1e18 ,
-			amt0:		Number(_li[1][9])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10])/1e18 *  (Number(_li[1][7])/1e18)/1e18 ,
+			amount0:	Number(_li[1][8])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10]) / 1e18 * (Number(_li[1][6])/1e18)/1e18 ,
+			amount1:	Number(_li[1][9])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10]) / 1e18 * (Number(_li[1][7])/1e18)/1e18 ,
 
 			price:		(Number(_li[1][3])/1e18) / Number(_li[1][0])/1e18 ,
 
