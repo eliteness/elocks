@@ -189,8 +189,9 @@ function notice(c) {
 	$("content1").innerHTML = c
 }
 
+const timeFormat = (timestamp) => {const seconds = Math.floor((Date.now() - timestamp) / 1000);const prefix = seconds < 0 ? "For the next " : "Expired ";const absSeconds = Math.abs(seconds);return prefix + (absSeconds < 60 ? absSeconds + " seconds" : absSeconds < 3600 ? Math.floor(absSeconds / 60) + " minutes" : absSeconds < 86400 ? Math.floor(absSeconds / 3600) + " hours" : absSeconds < 2592000 ? Math.floor(absSeconds / 86400) + " days" : absSeconds < 31536000 ? Math.floor(absSeconds / 2592000) + " months" : Math.floor(absSeconds / 31536000) + " years") + (seconds < 0 ? "" : " ago");};
 
-LPABI = ["function balanceOf(address) public view returns(uint)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function name() public view returns(string)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
+LPABI = ["function balanceOf(address) public view returns(uint)","function metadata() public view returns(uint,uint,uint,uint,bool,address,address)","function getAssetPrice(address) public view returns(uint)","function approve(address,uint)","function allowance(address,address) public view returns(uint)","function earned(address,address) public view returns(uint)","function earnings(address,address) public view returns(uint)","function name() public view returns(string)","function symbol() public view returns(string)","function tvl() public view returns(uint)","function apr() public view returns(uint)","function totalSupply() public view returns(uint)","function deposit(uint)","function withdraw(uint)"]
 
 ELOCKERABI = [{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "owner","type": "address"},{"indexed": true,"internalType": "address","name": "approved","type": "address"},{"indexed": true,"internalType": "uint256","name": "tokenId","type": "uint256"}],"name": "Approval","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "owner","type": "address"},{"indexed": true,"internalType": "address","name": "operator","type": "address"},{"indexed": false,"internalType": "bool","name": "approved","type": "bool"}],"name": "ApprovalForAll","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "by","type": "address"},{"indexed": true,"internalType": "address","name": "to","type": "address"},{"indexed": true,"internalType": "address","name": "pool","type": "address"},{"indexed": false,"internalType": "uint256","name": "amount","type": "uint256"},{"indexed": false,"internalType": "uint256","name": "expiry","type": "uint256"},{"indexed": false,"internalType": "address","name": "agent","type": "address"},{"indexed": false,"internalType": "uint256","name": "percent","type": "uint256"}],"name": "LockCreated","type": "event"},{"anonymous": false,"inputs": [{"indexed": true,"internalType": "address","name": "from","type": "address"},{"indexed": true,"internalType": "address","name": "to","type": "address"},{"indexed": true,"internalType": "uint256","name": "tokenId","type": "uint256"}],"name": "Transfer","type": "event"},{"inputs": [],"name": "AprGuru","outputs": [{"internalType": "contract IAprGuru","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "TvlGuru","outputs": [{"internalType": "contract ITvlGuru","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "admin","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_approved","type": "address"},{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "approve","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "art","outputs": [{"internalType": "contract IArt","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_owner","type": "address"}],"name": "balanceOf","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IPair","name": "_lp","type": "address"},{"internalType": "uint256","name": "_amt","type": "uint256"},{"internalType": "uint256","name": "_exp","type": "uint256"}],"name": "createLock","outputs": [{"internalType": "contract IeLocker","name": "_locker","type": "address"},{"internalType": "uint256","name": "_ID","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IPair","name": "_lp","type": "address"},{"internalType": "uint256","name": "_amt","type": "uint256"},{"internalType": "uint256","name": "_exp","type": "uint256"},{"internalType": "address","name": "_to","type": "address"}],"name": "createLockFor","outputs": [{"internalType": "contract IeLocker","name": "_locker","type": "address"},{"internalType": "uint256","name": "_ID","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IPair","name": "_lp","type": "address"},{"internalType": "uint256","name": "_amt","type": "uint256"},{"internalType": "uint256","name": "_exp","type": "uint256"},{"components": [{"internalType": "address","name": "agent","type": "address"},{"internalType": "uint256","name": "percent","type": "uint256"}],"internalType": "struct IeLocker.Referral","name": "_ref","type": "tuple"}],"name": "createLockWithReferral","outputs": [{"internalType": "contract IeLocker","name": "_locker","type": "address"},{"internalType": "uint256","name": "_ID","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IPair","name": "_lp","type": "address"},{"internalType": "uint256","name": "_amt","type": "uint256"},{"internalType": "uint256","name": "_exp","type": "uint256"},{"internalType": "address","name": "_to","type": "address"},{"components": [{"internalType": "address","name": "agent","type": "address"},{"internalType": "uint256","name": "percent","type": "uint256"}],"internalType": "struct IeLocker.Referral","name": "_ref","type": "tuple"}],"name": "createLockWithReferralFor","outputs": [{"internalType": "contract IeLocker","name": "_locker","type": "address"},{"internalType": "uint256","name": "_ID","type": "uint256"}],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "design","outputs": [{"internalType": "contract IeLocker","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "factory","outputs": [{"internalType": "contract IFactory","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "feeSynthesizer","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "getApproved","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "contract IeLocker","name": "_design","type": "address"},{"internalType": "contract IArt","name": "_art","type": "address"},{"internalType": "contract IVoter","name": "_vtr","type": "address"}],"name": "initialize","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_owner","type": "address"},{"internalType": "address","name": "_operator","type": "address"}],"name": "isApprovedForAll","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_spender","type": "address"},{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "isApprovedOrOwner","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_lockID","type": "uint256"}],"name": "lockInfo","outputs": [{"internalType": "address[7]","name": "","type": "address[7]"},{"internalType": "uint256[11]","name": "","type": "uint256[11]"},{"internalType": "uint256[]","name": "","type": "uint256[]"},{"internalType": "contract IERC20[]","name": "_rt","type": "address[]"},{"internalType": "uint256[]","name": "_ra","type": "uint256[]"},{"internalType": "uint256[]","name": "_rd","type": "uint256[]"},{"internalType": "string[]","name": "_rs","type": "string[]"},{"components": [{"internalType": "address","name": "agent","type": "address"},{"internalType": "uint256","name": "percent","type": "uint256"}],"internalType": "struct IeLocker.Referral","name": "","type": "tuple"},{"internalType": "string[4]","name": "_str","type": "string[4]"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_lockID","type": "uint256"}],"name": "lockedAssets","outputs": [{"internalType": "contract IPair","name": "","type": "address"},{"internalType": "uint256","name": "","type": "uint256"},{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "lockers","outputs": [{"internalType": "contract IeLocker","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "name","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "pure","type": "function"},{"inputs": [{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "ownerOf","outputs": [{"internalType": "address","name": "","type": "address"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "ownership_change","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "","type": "uint256"}],"name": "referrals","outputs": [{"internalType": "address","name": "agent","type": "address"},{"internalType": "uint256","name": "percent","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_from","type": "address"},{"internalType": "address","name": "_to","type": "address"},{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "safeTransferFrom","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_from","type": "address"},{"internalType": "address","name": "_to","type": "address"},{"internalType": "uint256","name": "_tokenId","type": "uint256"},{"internalType": "bytes","name": "_data","type": "bytes"}],"name": "safeTransferFrom","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_new_admin","type": "address"}],"name": "setAdmin","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_operator","type": "address"},{"internalType": "bool","name": "_approved","type": "bool"}],"name": "setApprovalForAll","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IAprGuru","name": "_a","type": "address"}],"name": "setAprGuru","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IArt","name": "_art","type": "address"}],"name": "setArt","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract IeLocker","name": "_design","type": "address"}],"name": "setDesign","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "address","name": "_fs","type": "address"}],"name": "setFeeSynthesizer","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "contract ITvlGuru","name": "_t","type": "address"}],"name": "setTvlGuru","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [{"internalType": "bytes4","name": "_interfaceID","type": "bytes4"}],"name": "supportsInterface","outputs": [{"internalType": "bool","name": "","type": "bool"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "symbol","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "pure","type": "function"},{"inputs": [{"internalType": "address","name": "_owner","type": "address"},{"internalType": "uint256","name": "_tokenIndex","type": "uint256"}],"name": "tokenOfOwnerByIndex","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "tokenURI","outputs": [{"internalType": "string","name": "","type": "string"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_usr","type": "address"}],"name": "tokensOfOwner","outputs": [{"internalType": "uint256[]","name": "","type": "uint256[]"}],"stateMutability": "view","type": "function"},{"inputs": [],"name": "totalSupply","outputs": [{"internalType": "uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},{"inputs": [{"internalType": "address","name": "_from","type": "address"},{"internalType": "address","name": "_to","type": "address"},{"internalType": "uint256","name": "_tokenId","type": "uint256"}],"name": "transferFrom","outputs": [],"stateMutability": "nonpayable","type": "function"},{"inputs": [],"name": "voter","outputs": [{"internalType": "contract IVoter","name": "","type": "address"}],"stateMutability": "view","type": "function"}];
 
@@ -336,13 +337,15 @@ async function createLock() {
 	al = await Promise.all([
 		_BASE.allowance(window.ethereum.selectedAddress, LOCKER_ROOM),
 		_BASE.balanceOf(window.ethereum.selectedAddress),
-		_BASE.symbol()
+		_BASE.symbol(),
+		_BASE.metadata()
 	]);
 
 	BASE_NAME =  al[2];
 
 	if(Number(_oamt)>Number(al[1])) {
 		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 			<h2>${BASE_NAME}<br>Insufficient Balance!</h2>
 			<h3>Desired Amount:</h3>${(Number(_oamt)/1e18).toFixed(18)}<br>
 			<h3>Actual Balance:</h3>${(al[1]/1e18).toFixed(18)}<br><br>
@@ -353,6 +356,7 @@ async function createLock() {
 
 	if(Number(_oamt)>Number(al[0])){
 		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 			<h3>Approval required</h3>
 			Please grant ${BASE_NAME} allowance.<br><br>
 			<h3>Current Allowance:</h3>${(al[0]/1e18).toFixed(18)}<br><br>
@@ -362,12 +366,14 @@ async function createLock() {
 		let _tr = await _BASE.approve(LOCKER_ROOM,_oamt);
 		console.log(_tr);
 		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 			<h3>Submitting Approval Transaction!</h3>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 		`);
 		_tw = await _tr.wait()
 		console.log(_tw)
 		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 			<h3>Approval Completed!</h3>
 			<br>Spending rights of ${Number(_oamt)/1e18} ${BASE_NAME} granted.<br>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
@@ -377,25 +383,27 @@ async function createLock() {
 	}
 
 	notice(`
-		<h3>Order Summary</h3>
-		<b>eLOCKing ${BASE_NAME}</b><br>
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+		<h3>eLOCKing ${BASE_NAME}</h3>
 
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} to Deposit: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} to Deposit: <b>${fornum(_oamt,18)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCKS.createLockWithReferral(_LP,_oamt,Math.floor(_END.valueOf()/1e3),window.ethereum.selectedAddress,{AGENT,PERCENT});
 	console.log(_tr);
 	notice(`
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Submitted!</h3>
 		<br><h4>Minting new eLOCK ...</h4>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} Depositing: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} Depositing: <b>${fornum(_oamt,18)}</b><br>
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Completed!</h3>
 		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${fornum(_oamt,18)}</b><br>
 		<br><br>
@@ -523,18 +531,20 @@ async function searchNFT(_NFTID) {
 
 
 		$("spotlight").innerHTML = `
-			<h3>${ LD.symbol }</h3>
+			<img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token0.toLowerCase()}.png"><img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token1.toLowerCase()}.png">
+			<h3> ${ LD.symbol }</h3>
 			${ LD.name }
 			<br><br>
 
 			<h3>LP Locked till</h3>
 			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
+			<br>${ timeFormat(new Date(LD.expiry)) }
 			<br><br>
 
 			<h3>Amount Locked</h3>
 			$${ LD.tvl.toLocaleString() } TVL
-			<br>${ LD.total.toFixed(18) } LP
 			<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) }% of Pool
+			<br>${ LD.total.toFixed(18) } LP
 			<br>${ LD.symbol0 } : ${ LD.amount0.toFixed(Math.log10(LD.deci0)) }
 			<br>${ LD.symbol1 } : ${ LD.amount1.toFixed(Math.log10(LD.deci1)) }
 			<br><br>
