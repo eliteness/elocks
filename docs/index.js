@@ -469,24 +469,27 @@ async function searchNFT(_NFTID) {
 			earner:		_li[0][2] ,
 			pool:		_li[0][3] ,
 			gauge:		_li[0][4] ,
+			token0:		_li[0][5] ,
+			token1:		_li[0][6] ,
 
 			total:		Number(_li[1][0])/1e18 ,
 			expiry:		Number(_li[1][1])*1000 ,
 			apr:		Number(_li[1][2])/1e18 ,
 			tvl:		Number(_li[1][3])/1e18 ,
-			cfees0:		Number(_li[1][4])/1e18 ,
-			cfees1:		Number(_li[1][5])/1e18 ,
+			cfees0:		Number(_li[1][4]) /Number(_li[1][6])/1e18,
+			cfees1:		Number(_li[1][5]) /Number(_li[1][7])/1e18,
 			deci0:		Number(_li[1][6])/1e18 ,
 			deci1:		Number(_li[1][7])/1e18 ,
-			res0:		Number(_li[1][8])/1e18 ,
-			res1:		Number(_li[1][9])/1e18 ,
+			res0:		Number(_li[1][8]) /Number(_li[1][6])/1e18 ,
+			res1:		Number(_li[1][9]) /Number(_li[1][7])/1e18 ,
 			pooltotal:	Number(_li[1][10])/1e18 ,
 
-			crewards:	_li[2].map(i=>Number(i)/1e18) ,
+			crewards:	_li[2] ,
 			trewards:	_li[3] ,
-			arewards:	_li[4].map(i=>Number(i)/1e18) ,
+			arewards:	_li[4] ,
 			drewards:	_li[5] ,
 			srewards:	_li[6] ,
+			earnings:	[] ,
 
 			refagent:	_li[7][0],
 			refpercent:	Number(_li[7][1])/10,
@@ -508,6 +511,12 @@ async function searchNFT(_NFTID) {
 			amt0:		Number(_li[1][9])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10])/1e18 *  (Number(_li[1][7])/1e18)/1e18 ,
 
 			price:		(Number(_li[1][3])/1e18) / Number(_li[1][0])/1e18 ,
+
+		}
+
+		// normalize earnings
+		for(i=0;i<LD.trewards.length;i++) {
+			LD.earnings[i] = LD.crewards[i] / LD.drewards[i];
 		}
 
 
@@ -521,30 +530,35 @@ async function searchNFT(_NFTID) {
 			<br><br>
 
 			<h3>Amount Locked</h3>
-			${ LD.total } LP
-			<br>${ LD.tvl } TVL
-			<br>${ LD.total / LD.pooltotal * 100 } % of Pool
-			<br>${ LD.symbol0 } : ${ LD.amount0 }
-			<br>${ LD.symbol1 } : ${ LD.amount1 }
+			${ LD.total.toFixed(18) } LP
+			<br>$${ LD.tvl.toLocaleString() } TVL
+			<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) } % of Pool
+			<br>${ LD.symbol0 } : ${ LD.amount0.toFixed(Math.log10(LD.deci0)) }
+			<br>${ LD.symbol1 } : ${ LD.amount1.toFixed(Math.log10(LD.deci1)) }
 			<br><br>
 
 
 			<h3>Claimable Fees Rewards</h3>
-			${ LD.symbol0 } : ${ LD.cfees0 }
-			<br><br>${ LD.symbol1 } : ${ LD.cfees1 }
+			${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
+			<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
 			<br><br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
 			<br><br>
 
 			<h3>Claimable Farming Rewards</h3>
-			${LD.srewards[0]?LD.srewards[0]:"No Rewards"} : ${ LD.crewards[0]?LD.crewards[0]:0 }
+			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?LD.crewards[0]:0 }
 			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 			<br><br>
 
+			<h3>Total Rewards Earned</h3>
+			${ (LD.earnings.map( (e,i,o) => (LD.srewards[i]+" : "+ e) )).join("<br>") }
+
 			<h3>Related Addresses</h3>
-			Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner.substr(0,10)+"-"+ LD.owner.substr(-8)}</a>
-			<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner.substr(0,10)+"-"+ LD.earner.substr(-8)}</a>
-			<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool.substr(0,10)+"-"+ LD.pool.substr(-8)}</a>
-			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge.substr(0,10)+"-"+ LD.gauge.substr(-8)}</a>
+			Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a>
+			<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a>
+			<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a>
+			<br>${ LD.symbol0 } : <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a>
+			<br>${ LD.symbol1 } : <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a>
+			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a>
 
 		`;
 

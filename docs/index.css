@@ -57,6 +57,7 @@
 .tab button.active {
     background-color: #4567;
     color: #3ff;
+    border-bottom: 2px solid;
 }
 
 .tabcontent {
@@ -255,7 +256,6 @@ footer{
 }
 
 .c2a{
-	width:60%;
 	max-width:500px;
 	margin:auto auto;
     background: rgba(0, 0, 0, 0.5);
@@ -285,8 +285,6 @@ footer{
     color: white;
     cursor: pointer;
     transition: box-shadow 0.3s ease-in-out;
-    width: 60% !important;
-    height: 32px !important;
 }
 
 .c2a button:hover {
@@ -373,11 +371,8 @@ button.submit:active{
 	background:linear-gradient(#777,#111) !important;
 }
 
-@media (max-width: 700px) {
-    .popup {
-        width: 90%;
-    }
 
+@media (max-width: 700px) {
     .topstats {
         flex-direction: column;
     }
@@ -390,9 +385,21 @@ button.submit:active{
         ;
     }
 
+}
+
+
+@media (min-width: 700px) {
+    .popup {
+        width: 90%;
+    }
+
 	button.submit {
 		margin: 5px auto;
 		padding: 10px;
 		font-size: 1em;
+	}
+
+	.c2a, .c2a button {
+		width: 60% !important;
 	}
 }
