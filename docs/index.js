@@ -306,8 +306,10 @@ async function createLock_check() {
 			<h3>Creating a new eLOCK!</h3>
 			Your selected unlock date is ${new Date(_END)}. Please make sure this is the desired lockup time. You wont be able to reduce this later!
 			<br><br>
-			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for smaller periods and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to the new Sonic chain when the time comes in the next few month. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards without any fee if you setup your eLOCKS NFT to allow you to claim your Rewards even after the transfer.
-			<br><i>(Note: Only the Current holder of an eLOCK can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder.)</i>
+			If the Pool selected has no Gauge Farms yet, then you will Earn all the Trade Fees. If a gauge is established of this pool on a later date, your deposited LP will be automatically staked into the Gauge Farms for earning Higher Rewards for you.
+			<br><br>
+			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for smaller periods and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to the new Sonic chain when the time comes in the next few month. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards if you setup your eLOCKS NFT to allow you to claim your Rewards even after the transfer. This is done automatically at creation.
+			<br><br><i>Note: Only the Current holder of an eLOCK can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder. As such, when you create an eLOCKS NFT, you become the natural Yield Earner. Unless changed by a later future owner, you will continue to Earn all the Yields.</i>
 			<br><br>
 			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like!
 			<br><br>
