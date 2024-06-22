@@ -478,8 +478,8 @@ async function searchNFT(_NFTID) {
 			tvl:		Number(_li[1][3])/1e18 ,
 			cfees0:		Number(_li[1][4]) /Number(_li[1][6])/1e18,
 			cfees1:		Number(_li[1][5]) /Number(_li[1][7])/1e18,
-			deci0:		Number(_li[1][6])/1e18 ,
-			deci1:		Number(_li[1][7])/1e18 ,
+			deci0:		Number(_li[1][6]) ,
+			deci1:		Number(_li[1][7]) ,
 			res0:		Number(_li[1][8]) /Number(_li[1][6])/1e18 ,
 			res1:		Number(_li[1][9]) /Number(_li[1][7])/1e18 ,
 			pooltotal:	Number(_li[1][10])/1e18 ,
@@ -507,8 +507,8 @@ async function searchNFT(_NFTID) {
 			symbol1:	_li[8][3] ,
 
 			/// DERIVED DATA
-			amount0:	Number(_li[1][8])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10]) / 1e18 * (Number(_li[1][6])/1e18)/1e18 ,
-			amount1:	Number(_li[1][9])/1e18 * (Number(_li[1][0])/1e18) / Number(_li[1][10]) / 1e18 * (Number(_li[1][7])/1e18)/1e18 ,
+			amount0:	Number(_li[1][8]) /Number(_li[1][6]) *  Number(_li[1][0])/Number(_li[1][10]) ,
+			amount1:	Number(_li[1][9]) /Number(_li[1][7]) *  Number(_li[1][0])/Number(_li[1][10]) ,
 
 			price:		(Number(_li[1][3])/1e18) / Number(_li[1][0])/1e18 ,
 
@@ -530,9 +530,9 @@ async function searchNFT(_NFTID) {
 			<br><br>
 
 			<h3>Amount Locked</h3>
-			${ LD.total.toFixed(18) } LP
-			<br>$${ LD.tvl.toLocaleString() } TVL
-			<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) } % of Pool
+			$${ LD.tvl.toLocaleString() } TVL
+			<br>${ LD.total.toFixed(18) } LP
+			<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) }% of Pool
 			<br>${ LD.symbol0 } : ${ LD.amount0.toFixed(Math.log10(LD.deci0)) }
 			<br>${ LD.symbol1 } : ${ LD.amount1.toFixed(Math.log10(LD.deci1)) }
 			<br><br>
@@ -541,16 +541,17 @@ async function searchNFT(_NFTID) {
 			<h3>Claimable Fees Rewards</h3>
 			${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
 			<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
-			<br><br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
+			<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
 			<br><br>
 
 			<h3>Claimable Farming Rewards</h3>
-			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?LD.crewards[0]:0 }
+			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
 			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 			<br><br>
 
 			<h3>Total Rewards Earned</h3>
-			${ (LD.earnings.map( (e,i,o) => (LD.srewards[i]+" : "+ e) )).join("<br>") }
+			${ (LD.earnings.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
+			<br><br>
 
 			<h3>Related Addresses</h3>
 			Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a>
