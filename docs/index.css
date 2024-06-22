@@ -33,7 +33,7 @@
 /* Tabbed content */
 .tab {
     overflow: hidden;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid #ccc;
 	text-align: center;
 }
 
@@ -49,8 +49,9 @@
 }
 
 .tab button:hover {
-    background-color: #4567;
+    background-color: #567;
     color: #3ff;
+    font-weight: bolder;
 }
 
 .tab button.active {
@@ -143,6 +144,9 @@ footer{
     max-height: 30%;
     overflow: auto;
 }
+.content a {
+    color: aqua;
+}
 
 .topnav {
     display: flex;
@@ -227,7 +231,7 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 .topstat {
@@ -313,7 +317,7 @@ footer{
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
-    margin: 10px;
+    margin: auto;
     flex: 1;
     min-width: 200px;
     text-align: center;
@@ -383,7 +387,7 @@ button.submit:active{
     }
 
     .collection .coll div {
-        min-width: 100%;
+        ;
     }
 
 	button.submit {

@@ -71,8 +71,9 @@
 
         <!-- Tab Navigation -->
         <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'Create')">Create eLOCK</button>
-            <button class="tablinks" onclick="openTab(event, 'Manage')">Manage eLOCK</button>
+            <button class="tablinks" onclick="openTab(event, 'Create')">Create eLOCKS</button>
+            <button class="tablinks" onclick="openTab(event, 'Explore')">Explore NFTs</button>
+            <button class="tablinks" onclick="openTab(event, 'Manage')">My Collection</button>
         </div>
 
         <!-- Tab content -->
@@ -82,35 +83,26 @@
                     <h2>Create eLOCK</h2>
                     <div class="form-item-container">
                         <label for="cl-lp">1. Choose the Pool</label>
-                        <input class="in-box" id="cl-lp" placeholder="0x1234..5678" required>
+                        <input required class="in-box" id="cl-lp" placeholder="0x1234..5678" step="0.000000000000002" min="0.000000000000002">
                     </div>
                     <div class="form-item-container">
                         <label for="cl-amt">2. Enter amount to lock</label>
-                        <input class="in-box" id="cl-amt" type="number" placeholder="1337.69" required>
+                        <input required class="in-box" id="cl-amt" type="number" placeholder="1337.69" >
                     </div>
                     <div class="wallet-balance" style="display:none;">
                         (<span id="cl-bal" onclick="document.getElementById('cl-amt').value=this.innerHTML">0.00</span> in wallet)
                     </div>
                     <div class="form-item-container">
                         <label for="cl-end">3. Select date of Expiry</label>
-                        <input class="in-box" id="cl-end" type="date" required>
+                        <input required class="in-box" id="cl-end" type="date">
                     </div>
                     <button type="submit" class="c2a-1 submit equal-gradient" onclick="createLock_check()">Create a new eLOCK</button>
                 </form>
             </div>
         </div>
 
-        <div id="Manage" class="tabcontent">
-            <div class="collection">
-                <div class="h-left">
-                    <div><h2>Discover and Manage eLOCK Positions</h2></div>
-                </div>
-                <div class="coll" id="coll-list">
-                    <div class="grayed">
-                        No locks found!<br><span>🔐</span>
-                    </div>
-                </div>
-            </div>
+        <div id="Explore" class="tabcontent">
+            <h2 style="font-family: light;text-align: center;">Discover and Manage eLOCK Positions</h2>
 			<div class="c2a">
 				<div class="explorer">
                     <div class="form-item-container">
@@ -127,6 +119,21 @@
 	    			</div>
     			</div>
 			</div>
+        </div>
+
+        <div id="Manage" class="tabcontent">
+            <div class="collection">
+                <div class="h-left">
+                    <h2 style="font-family: light;text-align: center;">View all your eLOCK Positions</h2>
+                </div>
+                <div class="coll" id="coll-list">
+                    <div class="grayed">
+                        No locks found!<br><span>🔐</span>
+                    </div>
+                </div>
+            </div>
+
+			<!--
 			<hr><hr>
 			Below is a sample dummy for styling
 			<hr>
@@ -139,38 +146,39 @@
 					</div>
 				</div>
 				<div id="spotlight">
-			<h3>locked:vAMM-EQUAL/HOOPS</h3>
-			Equalocker Locked VolatileV1 AMM - EQUAL/HOOPS 🔐
-			<br>
+					<h3>locked:vAMM-EQUAL/HOOPS</h3>
+					Equalocker Locked VolatileV1 AMM - EQUAL/HOOPS 🔐
+					<br>
 
-			<h3>LP Locked till</h3>
-			2024-05-03 08:45:00
-			<br>
+					<h3>LP Locked till</h3>
+					2024-05-03 08:45:00
+					<br>
 
-			<h3>Amount Locked</h3>
-			1337
-			<br>
+					<h3>Amount Locked</h3>
+					1337
+					<br>
 
 
-			<h3>Claimable Fees Rewards</h3>
-			2.6124663349773347 EQUAL
-			<br>8613.688225996302 HOOPS
-			<br><button class="submit equal-gradient" onclick="LD_claimFees(0x89cf6c1A27e7756eB250e1Fc1f07108A0e7D4615)"> Claim Fees Rewards </button>
-			<br>
+					<h3>Claimable Fees Rewards</h3>
+					2.6124663349773347 EQUAL
+					<br>8613.688225996302 HOOPS
+					<br><button class="submit equal-gradient" onclick="LD_claimFees(0x89cf6c1A27e7756eB250e1Fc1f07108A0e7D4615)"> Claim Fees Rewards </button>
+					<br>
 
-			<h3>Claimable Farming Rewards</h3>
-			0 EQUAL
-			<br><button class="submit equal-gradient" onclick="LD_claimFees([object Object])"> Claim Farming Rewards </button>
-			<br>
+					<h3>Claimable Farming Rewards</h3>
+					0 EQUAL
+					<br><button class="submit equal-gradient" onclick="LD_claimFees([object Object])"> Claim Farming Rewards </button>
+					<br>
 
-			<h3>Related Addresses</h3>
-			<br>Owner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
-			<br>Earner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
-			<br>Pool : <a href="https://ftmscan.com/address/0xfe02fd5b3F8904e2f4108505bEE7cf91E1D179E4" target="_blank">0xfe02fd5b-E1D179E4</a>
-			<br>Gauge : <a href="https://ftmscan.com/address/0x0000000000000000000000000000000000000000" target="_blank">0x00000000-00000000</a>
+					<h3>Related Addresses</h3>
+					<br>Owner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
+					<br>Earner : <a href="https://ftmscan.com/address/0x167D87A906dA361A10061fe42bbe89451c2EE584" target="_blank">0x167D87A9-1c2EE584</a>
+					<br>Pool : <a href="https://ftmscan.com/address/0xfe02fd5b3F8904e2f4108505bEE7cf91E1D179E4" target="_blank">0xfe02fd5b-E1D179E4</a>
+					<br>Gauge : <a href="https://ftmscan.com/address/0x0000000000000000000000000000000000000000" target="_blank">0x00000000-00000000</a>
 
-		</div>
+				</div>
 			</div>
+			-->
         </div>
 		<footer>
         <h2>Powered by Guru Network</h2>
@@ -218,25 +226,10 @@
         NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
         NATIVE_NAME = "FTM";
         NATIVE_LOGO = "https://ftm.guru/icons/ftm.svg";
-        BASE = "0x6E3e180b1C5742FC445F0bbdaB7Aa7b902560630";
-        BASE_NAME = "MLP";
-        BASE_LOGO = "https://ftm.guru/icons/morphexmlp.png";
-        WRAP = "0x1559eaee5d7194681a72236f2635263009ec7204";
-        WRAP_NAME = "eliteMorphexMLP";
-        WRAP_LOGO = "https://ftm.guru/icons/eliteMorphexMLP.png";
-        MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-        SMART_MANAGER = "0x0b5f2839513D64FFD034a928f763800974cacaba";
-        FARM = "0xCe780431BDa4020403427E3416fb407edBdb21F5";
-        TEARNED = ["0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6"];
-        TEARNED_LOGO = ["https://ftm.guru/icons/equal.png"];
-        TEARNED_NAME = ["EQUAL"];
-        VOTER = "0xE3D1A117dF7DCaC2eB0AC8219341bAd92f18dAC1";
-
-        LOCKER_ROOM = "0x065717ffe068b3dc917e5bc26634f8bcd37bd191";
+        LOCKER_ROOM = "0x2f20A659601d1c161A108E0725FEF31256a907ad";
         FACTORY = "0xc6366efd0af1d09171fe0ebf32c7943bb310832a";
         AGENT = "0x167d87a906da361a10061fe42bbe89451c2ee584";
-        PERCENT = 100;
-
+        PERCENT = 0.1e18;
     </script>
 </body>
 </html>
