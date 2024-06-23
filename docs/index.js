@@ -662,7 +662,7 @@ async function LD_claimRewards(_ld) {
 	notice(`
 		<h3>Claiming Gauge Farming Rewards</h3>
 		<b>${_ld.name}</b>
-		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCK.claimRewards();
@@ -671,7 +671,7 @@ async function LD_claimRewards(_ld) {
 
 		<h3>Claiming Gauge Farming Rewards</h3>
 		<b>${_ld.name}</b>
-		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -681,7 +681,7 @@ async function LD_claimRewards(_ld) {
 		<h3>Gauge Farming Rewards Claimed!</h3>
 		<b>${_ld.name}</b>
 
-		<br><br>${ LD.crewards[0]?LD.crewards[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
