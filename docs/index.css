@@ -377,8 +377,7 @@ button.submit:active{
 
 #spotlight {
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap:10px
+    grid-template-columns: auto;
 }
 
 #spotlight input {
@@ -420,5 +419,10 @@ button:disabled {
 
 	.c2a, .c2a button {
 		width: 60%;
+	}
+
+	#spotlight {
+    	display: grid;
+    	grid-template-columns: 50% 50%;
 	}
 }

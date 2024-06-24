@@ -573,17 +573,17 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Change Yield Earner</h3>
-				<input required class="in-box" id="ld-earner" placeholder="0x1234..5678">
+				<input required class="in-box" id="ld-earner" placeholder="Enter an address like 0x1234..5678">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
 				<br><br>
 
 				<h3>Transfer your NFT</h3>
-				<input required class="in-box" id="ld-transfer" placeholder="0x1234..5678">
+				<input required class="in-box" id="ld-transfer" placeholder="Enter an address like 0x1234..5678">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
 				<br><br>
 
 				<h3>Increase Locked LP Amount</h3>
-				<input required class="in-box" id="ld-increase" type="number" placeholder="1337.69" step="0.000000000000002" min="0.000000000000002">
+				<input required class="in-box" id="ld-increase" type="number" placeholder="Enter LP amounts like 1337.69" step="0.000000000000002" min="0.000000000000002">
 				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
 				<br><br>
 
