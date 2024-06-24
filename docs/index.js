@@ -233,8 +233,10 @@ async function gubs() {
     else {
     	for(i=0;i<_ubs[0].length;i++) {
     		$("coll-list").innerHTML += `
-				<div onclick="searchNFT(${_ubs[0][i]})">
-					eLOCK 🔐<br><span>${_ubs[0][i]}</span>
+				<div onclick="openTab(event, 'Explore');$('search-inp').value=${_ubs[0][i]};searchNFT(${_ubs[0][i]})">
+					eLOCKS NFT 🔐<br>
+					<span># ${_ubs[0][i]}</span>
+					<br>Tap to Explore!
 				</div>
         	`;
     	}
@@ -522,76 +524,80 @@ async function searchNFT(_NFTID) {
 
 
 		$("spotlight").innerHTML = `
-			<img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token0.toLowerCase()}.png"><img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token1.toLowerCase()}.png">
-			<h3> ${ LD.symbol }</h3>
-			${ LD.name }
-			<br><br>
+			<div>
+				<img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token0.toLowerCase()}.png"><img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token1.toLowerCase()}.png">
+				<h3> ${ LD.symbol }</h3>
+				${ LD.name }
+				<br><br>
 
-			<h3>LP Locked till</h3>
-			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
-			<br>${ timeFormat(new Date(LD.expiry)) }
-			<br><br>
+				<h3>LP Locked till</h3>
+				${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
+				<br>${ timeFormat(new Date(LD.expiry)) }
+				<br><br>
 
-			<h3>Amount Locked</h3>
-			$${ LD.tvl.toLocaleString() } TVL
-			<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) }% of Pool
-			<br>${ LD.total.toFixed(18) } LP
-			<br>${ LD.symbol0 } : ${ LD.amount0.toFixed(Math.log10(LD.deci0)) }
-			<br>${ LD.symbol1 } : ${ LD.amount1.toFixed(Math.log10(LD.deci1)) }
-			<br><br>
+				<h3>Amount Locked</h3>
+				$${ LD.tvl.toLocaleString() } TVL
+				<br>${ (LD.total / LD.pooltotal * 100).toFixed(4) }% of Pool
+				<br>${ LD.total.toFixed(18) } LP
+				<br>${ LD.symbol0 } : ${ LD.amount0.toFixed(Math.log10(LD.deci0)) }
+				<br>${ LD.symbol1 } : ${ LD.amount1.toFixed(Math.log10(LD.deci1)) }
+				<br><br>
 
 
-			<h3>Total Rewards Earned</h3>
-			${ (LD.earnings.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
-			<br><br>
+				<h3>Total Rewards Earned</h3>
+				${ (LD.earnings.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
+				<br><br>
 
-			<h3>Related Addresses</h3>
-			Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a>
-			<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a>
-			<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a>
-			<br>${ LD.symbol0 } : <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a>
-			<br>${ LD.symbol1 } : <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a>
-			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a>
+				<h3>Related Addresses</h3>
+				Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a>
+				<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a>
+				<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a>
+				<br>${ LD.symbol0 } : <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a>
+				<br>${ LD.symbol1 } : <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a>
+				<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a>
 
-			<br><br>
-			<hr>
-			<br><br>
+				<br><br>
+			</div>
 
-			<h3>Claimable Fees Rewards</h3>
-			${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
-			<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
-			<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
-			<br><br>
 
-			<h3>Claimable Farming Rewards</h3>
-			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
-			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
-			<br><br>
+			<div>
+				<h3>Claimable Fees Rewards</h3>
+				${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
+				<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
+				<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
+				<br><br>
 
-			<h3>Change Yield Earner</h3>
-			<input required class="in-box" id="ld-earner" placeholder="0x1234..5678">
-			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
-			<br><br>
+				<h3>Claimable Farming Rewards</h3>
+				${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
+				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
+				<br><br>
 
-			<h3>Transfer eLOCKS NFT</h3>
-			<input required class="in-box" id="ld-transfer" placeholder="0x1234..5678">
-			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
-			<br><br>
+				<h3>Change Yield Earner</h3>
+				<input required class="in-box" id="ld-earner" placeholder="0x1234..5678">
+				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
+				<br><br>
 
-			<h3>Increase Locked LP Amount</h3>
-			<input required class="in-box" id="ld-increase" type="number" placeholder="1337.69" step="0.000000000000002" min="0.000000000000002">
-			<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
-			<br><br>
+				<h3>Transfer your NFT</h3>
+				<input required class="in-box" id="ld-transfer" placeholder="0x1234..5678">
+				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
+				<br><br>
 
-			<h3>Extend Unlock Date</h3>
-			<input required class="in-box" id="ld-extend" type="date">
-			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Deposit </button>
-			<br><br>
+				<h3>Increase Locked LP Amount</h3>
+				<input required class="in-box" id="ld-increase" type="number" placeholder="1337.69" step="0.000000000000002" min="0.000000000000002">
+				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
+				<br><br>
 
-			<h3>Withdraw</h3>
-			<input required class="in-box" id="ld-extend" type="date">
-			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Deposit </button>
-			<br><br>
+				<h3>Extend Unlock Date</h3>
+				<input required class="in-box" id="ld-extend" type="date">
+				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
+				<br><br>
+
+				<h3>Unlock & Withdraw LP</h3>
+				Reclaim your Locked LP tokens.
+				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Withdraw </button>
+				<br><br>
+
+			</div>
 
 
 		`;
@@ -720,7 +726,7 @@ async function LD_setEarner(_ld) {
 
 	notice(`
 		<h3>Changing Yield Earner</h3>
-		Current Earner:<br><b>${_ld.earner}</b>
+		Current Earner:<br><b>${_ld.earner}</b><br>
 		Desired Earner:<br><b>${_earner}</b>
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -728,7 +734,7 @@ async function LD_setEarner(_ld) {
 	console.log(_tr);
 	notice(`
 		<h3>Changing Yield Earner</h3>
-		Current Earner:<br><b>${_ld.earner}</b>
+		Current Earner:<br><b>${_ld.earner}</b><br>
 		Desired Earner:<br><b>${_earner}</b>
 		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -742,10 +748,10 @@ async function LD_setEarner(_ld) {
 }
 
 
-async function LD_setTransfer(_ld) {
+async function LD_transfer(_ld) {
 	_ld = LD;
 	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, signer);
-	let _receiver = $("ld-earner").value;
+	let _receiver = $("ld-transfer").value;
 	if(!ethers.utils.isAddress(_receiver)){
 		notice(`Invalid Receiver Address Input!<br>${_receiver}`);
 		return;
@@ -753,7 +759,7 @@ async function LD_setTransfer(_ld) {
 
 	notice(`
 		<h3>Transfer eLOCKS NFT #${LD.id}</h3>
-		From:<br><b>${_ld.owner}</b>
+		From:<br><b>${_ld.owner}</b><br>
 		To:<br><b>${_receiver}</b>
 		<br><h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -761,7 +767,7 @@ async function LD_setTransfer(_ld) {
 	console.log(_tr);
 	notice(`
 		<h3>Sending eLOCKS NFT #${LD.id}</h3>
-		From:<br><b>${_ld.owner}</b>
+		From:<br><b>${_ld.owner}</b><br>
 		To:<br><b>${_receiver}</b>
 		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -769,7 +775,7 @@ async function LD_setTransfer(_ld) {
 	console.log(_tw)
 	notice(`
 		<h3>eLOCKS NFT #${LD.id} delivered!</h3>
-		From:<br><b>${_ld.owner}</b>
+		From:<br><b>${_ld.owner}</b><br>
 		To:<br><b>${_receiver}</b>
 		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -784,13 +790,13 @@ async function LD_increase(_ld) {
 	_oamt = BigInt(Math.floor(_oamt * 1e18));
 
 	/// Business end
-	_BASE = new ethers.Contract(_LP, LPABI, signer);
+	_BASE = new ethers.Contract(LD.pool, LPABI, signer);
 	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, signer);
 	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
 
 
 	al = await Promise.all([
-		_BASE.allowance(window.ethereum.selectedAddress, LOCKER_ROOM),
+		_BASE.allowance(window.ethereum.selectedAddress, LD.locker),
 		_BASE.balanceOf(window.ethereum.selectedAddress),
 		LD.symbol,
 		[LD.deci0, LD.deci1, LD.res0, LD.res1, false, LD.token0, LD.token1]
@@ -818,7 +824,7 @@ async function LD_increase(_ld) {
 			<h3>Desired Allowance:</h3>${(Number(_oamt)/1e18).toFixed(18)}<br>
 			<h4><u><i>Confirm this transaction in your wallet!</i></u></h4>
 		`);
-		let _tr = await _BASE.approve(LOCKER_ROOM,_oamt);
+		let _tr = await _BASE.approve(LD.locker, _oamt);
 		console.log(_tr);
 		notice(`
 			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
@@ -878,7 +884,7 @@ async function LD_extend(_ld) {
 		notice(`
 			<h3>Lock period has passed!</h3>
 			Your selected unlock date is ${new Date(_END)}.
-			<br>All locks must expire in the future!
+			<br><br>All locks must expire in the future!
 			<br><br>
 		`);
 		return;
@@ -896,7 +902,7 @@ async function LD_extend(_ld) {
 			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
 			<br>${ timeFormat(new Date(LD.expiry)) }
 		</b>
-		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(18)}</b>
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCK.extendDate( BigInt(Math.floor(_END.valueOf()/1e3)) );
@@ -934,21 +940,21 @@ async function LD_withdraw(_ld) {
 
 	notice(`
 		<h3>Withdraw ${LD.symbol}</h3>
-		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(18)}</b>
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCK.unlockLiquidity();
 	console.log(_tr);
 	notice(`
 		<h3>Withdrawing ${LD.symbol}</h3>
-		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(18)}</b>
 		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	_tw = await _tr.wait();
 	console.log(_tw)
 	notice(`
 		<h3>${LD.symbol} has been unlocked!</h3>
-		Amount of LP tokens received:<br><b>${LD.total.toFixed(1e18)}</b>
+		Amount of LP tokens received:<br><b>${LD.total.toFixed(18)}</b>
 		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 }
