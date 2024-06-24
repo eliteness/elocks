@@ -277,28 +277,14 @@ async function createLock_check() {
 	_END = new Date($("cl-end").value);
 
 
-	if(_END.valueOf() > Date.now() + 86400e3 * 180) {
-		notice(`
-			<h3>Very long Lock period!</h3>
-			Your selected unlock date is ${new Date(_END)}, which is more than 6 months into the future!
-			<br><br>
-			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for a smaller period and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to the new Sonic chain when the time comes in the next few month. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards without any fee if you setup your eLOCKS NFT to allow you to claim your Rewards even after the transfer.
-			<br><i>(Note: Only the Current holder of an eLOCK can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder.)</i>
-			<br><br>
-			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like!
-			<br><br>
-			<button class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</button><br>
-			<button class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</button>
-		`);
-	}
-
-	else if(_END.valueOf() < Date.now() + 100e3 ) {
+	if(_END.valueOf() < Date.now() + 100e3 ) {
 		notice(`
 			<h3>Lock period has passed!</h3>
 			Your selected unlock date is ${new Date(_END)}.
 			<br>All locks must expire in the future!
 			<br><br>
 		`);
+		return;
 	}
 
 
@@ -306,6 +292,10 @@ async function createLock_check() {
 		notice(`
 			<h3>Creating a new eLOCK!</h3>
 			Your selected unlock date is ${new Date(_END)}. Please make sure this is the desired lockup time. You wont be able to reduce this later!
+			${ (_END.valueOf() > Date.now() + 86400e3 * 180)
+				?"<h3>Heads up! Very long Lock period!</h3>Your selected unlock date is" + _END + "which is " + timeFormat(_END.valueOf()) + " into the future!"
+				:""
+			}
 			<br><br>
 			If the Pool selected has no Gauge Farms yet, then you will Earn all the Trade Fees. If a gauge is established of this pool on a later date, your deposited LP will be automatically staked into the Gauge Farms for earning Higher Rewards for you.
 			<br><br>
@@ -349,7 +339,7 @@ async function createLock() {
 			<h2>${BASE_NAME}<br>Insufficient Balance!</h2>
 			<h3>Desired Amount:</h3>${(Number(_oamt)/1e18).toFixed(18)}<br>
 			<h3>Actual Balance:</h3>${(al[1]/1e18).toFixed(18)}<br><br>
-			<b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}.
+			<b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}. If you have Staked your tokens, please withdraw first.</b>
 		`);
 		return;
 	}
@@ -474,6 +464,7 @@ async function searchNFT(_NFTID) {
 		*/
 
 		LD = {
+			id:			_NFTID,
 			locker:		_li[0][0] ,
 			owner:		_li[0][1] ,
 			earner:		_li[0][2] ,
@@ -550,17 +541,6 @@ async function searchNFT(_NFTID) {
 			<br><br>
 
 
-			<h3>Claimable Fees Rewards</h3>
-			${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
-			<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
-			<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
-			<br><br>
-
-			<h3>Claimable Farming Rewards</h3>
-			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
-			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
-			<br><br>
-
 			<h3>Total Rewards Earned</h3>
 			${ (LD.earnings.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
 			<br><br>
@@ -572,6 +552,47 @@ async function searchNFT(_NFTID) {
 			<br>${ LD.symbol0 } : <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a>
 			<br>${ LD.symbol1 } : <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a>
 			<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a>
+
+			<br><br>
+			<hr>
+			<br><br>
+
+			<h3>Claimable Fees Rewards</h3>
+			${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
+			<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
+			<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
+			<br><br>
+
+			<h3>Claimable Farming Rewards</h3>
+			${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
+			<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
+			<br><br>
+
+			<h3>Change Yield Earner</h3>
+			<input required class="in-box" id="ld-earner" placeholder="0x1234..5678">
+			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
+			<br><br>
+
+			<h3>Transfer eLOCKS NFT</h3>
+			<input required class="in-box" id="ld-transfer" placeholder="0x1234..5678">
+			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
+			<br><br>
+
+			<h3>Increase Locked LP Amount</h3>
+			<input required class="in-box" id="ld-increase" type="number" placeholder="1337.69" step="0.000000000000002" min="0.000000000000002">
+			<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
+			<br><br>
+
+			<h3>Extend Unlock Date</h3>
+			<input required class="in-box" id="ld-extend" type="date">
+			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Deposit </button>
+			<br><br>
+
+			<h3>Withdraw</h3>
+			<input required class="in-box" id="ld-extend" type="date">
+			<br><button ${window.ethereum?.selectedAddress==LD.owner?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Deposit </button>
+			<br><br>
+
 
 		`;
 
@@ -684,5 +705,250 @@ async function LD_claimRewards(_ld) {
 		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+}
+
+
+async function LD_setEarner(_ld) {
+	_ld = LD;
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
+	let _earner = $("ld-earner").value;
+	if(!ethers.utils.isAddress(_earner)){
+		notice(`Invalid Earner Address Input!<br>${_earner}`);
+		return;
+	}
+
+	notice(`
+		<h3>Changing Yield Earner</h3>
+		Current Earner:<br><b>${_ld.earner}</b>
+		Desired Earner:<br><b>${_earner}</b>
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.setEarner(_earner);
+	console.log(_tr);
+	notice(`
+		<h3>Changing Yield Earner</h3>
+		Current Earner:<br><b>${_ld.earner}</b>
+		Desired Earner:<br><b>${_earner}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>Yield Earner Updated!</h3>
+		New Earner:<br><b>${_earner}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+}
+
+
+async function LD_setTransfer(_ld) {
+	_ld = LD;
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, signer);
+	let _receiver = $("ld-earner").value;
+	if(!ethers.utils.isAddress(_receiver)){
+		notice(`Invalid Receiver Address Input!<br>${_receiver}`);
+		return;
+	}
+
+	notice(`
+		<h3>Transfer eLOCKS NFT #${LD.id}</h3>
+		From:<br><b>${_ld.owner}</b>
+		To:<br><b>${_receiver}</b>
+		<br><h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCKS.transferFrom(window.ethereum.selectedAddress,_receiver,LD.id);
+	console.log(_tr);
+	notice(`
+		<h3>Sending eLOCKS NFT #${LD.id}</h3>
+		From:<br><b>${_ld.owner}</b>
+		To:<br><b>${_receiver}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>eLOCKS NFT #${LD.id} delivered!</h3>
+		From:<br><b>${_ld.owner}</b>
+		To:<br><b>${_receiver}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+}
+
+
+async function LD_increase(_ld) {
+	_ld = LD;
+
+	_oamt = $("ld-increase").value;
+	if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid LP amount!`); return;}
+	_oamt = BigInt(Math.floor(_oamt * 1e18));
+
+	/// Business end
+	_BASE = new ethers.Contract(_LP, LPABI, signer);
+	_ELOCKS = new ethers.Contract(LOCKER_ROOM, ELOCKERABI, signer);
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
+
+
+	al = await Promise.all([
+		_BASE.allowance(window.ethereum.selectedAddress, LOCKER_ROOM),
+		_BASE.balanceOf(window.ethereum.selectedAddress),
+		LD.symbol,
+		[LD.deci0, LD.deci1, LD.res0, LD.res1, false, LD.token0, LD.token1]
+	]);
+
+	BASE_NAME =  al[2];
+
+	if(Number(_oamt)>Number(al[1])) {
+		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+			<h2>${BASE_NAME}<br>Insufficient Balance!</h2>
+			<h3>Desired Amount to Increase:</h3>${(Number(_oamt)/1e18).toFixed(18)}<br>
+			<h3>Actual Balance:</h3>${(al[1]/1e18).toFixed(18)}<br><br>
+			<b>Please reduce the amount and retry again, or accumulate some more ${BASE_NAME}. If you have Staked your tokens, please withdraw first.</b>
+		`);
+		return;
+	}
+
+	if(Number(_oamt)>Number(al[0])){
+		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+			<h3>Approval required</h3>
+			Please grant ${BASE_NAME} allowance.<br><br>
+			<h3>Current Allowance:</h3>${(al[0]/1e18).toFixed(18)}<br><br>
+			<h3>Desired Allowance:</h3>${(Number(_oamt)/1e18).toFixed(18)}<br>
+			<h4><u><i>Confirm this transaction in your wallet!</i></u></h4>
+		`);
+		let _tr = await _BASE.approve(LOCKER_ROOM,_oamt);
+		console.log(_tr);
+		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+			<h3>Submitting Approval Transaction!</h3>
+			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+		`);
+		_tw = await _tr.wait()
+		console.log(_tw)
+		notice(`
+			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+			<h3>Approval Completed!</h3>
+			<br>Spending rights of ${Number(_oamt)/1e18} ${BASE_NAME} granted.<br>
+			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+			<br><br>
+			Please confirm the next step with your wallet provider now.
+		`);
+	}
+
+	notice(`
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+		<h3>eLOCKing ${BASE_NAME}</h3>
+
+		${BASE_NAME} to Deposit: <b>${fornum(_oamt,18)}</b><br>
+
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.increaseAmount(_oamt);
+	console.log(_tr);
+	notice(`
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+		<h3>Order Submitted!</h3>
+		<br><h4>Adding more LP to eLOCK #${LD.id}</h4>
+		${BASE_NAME} Depositing: <b>${fornum(_oamt,18)}</b><br>
+		<br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
+		<h3>Added more LP to eLOCK #${LD.id}!</h3>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${fornum(_oamt,18)}</b><br>
+		<br><br>
+		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	gubs();
+}
+
+
+
+async function LD_extend(_ld) {
+	_ld = LD;
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
+
+	_END = new Date($("ld-extend").value);
+	if(_END.valueOf() < Date.now() + 100e3 ) {
+		notice(`
+			<h3>Lock period has passed!</h3>
+			Your selected unlock date is ${new Date(_END)}.
+			<br>All locks must expire in the future!
+			<br><br>
+		`);
+		return;
+	}
+
+	notice(`
+		<h3>Extend expiry of eLOCKS NFT #${LD.id}</h3>
+		${
+			(_END.valueOf() > Date.now() + 86400e3 * 180)
+				?"<h3>Heads up! Very long Lock period!</h3>Your selected unlock date is" + _END + "which is " + timeFormat(_END.valueOf()) + " into the future!"
+				:""
+		}
+		Current Unlock Date:<br>
+		<b>
+			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
+			<br>${ timeFormat(new Date(LD.expiry)) }
+		</b>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.extendDate( BigInt(Math.floor(_END.valueOf()/1e3)) );
+	console.log(_tr);
+	notice(`
+		<h3>Extending expiry of eLOCKS NFT #${LD.id}</h3>
+		New Unlock Date:<br>
+		<b>
+			${ (new Date(_END.valueOf())).toISOString().replace("T"," ").split(".")[0] }
+			<br>${ timeFormat(new Date(_END.valueOf())) }
+		</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>eLOCKS NFT #${LD.id} relocked!</h3>
+		New Unlock Date:<br>
+		<b>
+			${ (new Date(_END.valueOf())).toISOString().replace("T"," ").split(".")[0] }
+			<br>${ timeFormat(new Date(_END.valueOf())) }
+		</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+}
+
+
+async function LD_withdraw(_ld) {
+	_ld = LD;
+	_ELOCK = new ethers.Contract(_ld.locker, ELOCKSABI, signer);
+	if(LD.expiry > Date.now()){
+		notice(`<h2>Too Early!</h2>eLOCK #${LD.id} is locked ${timeFormat(LD.expiry)} and will unlock at ${new Date(LD.expiry)}.`);
+		return;
+	}
+
+	notice(`
+		<h3>Withdraw ${LD.symbol}</h3>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
+	`);
+	let _tr = await _ELOCK.unlockLiquidity();
+	console.log(_tr);
+	notice(`
+		<h3>Withdrawing ${LD.symbol}</h3>
+		Amount of LP tokens locked:<br><b>${LD.total.toFixed(1e18)}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
+	`);
+	_tw = await _tr.wait();
+	console.log(_tw)
+	notice(`
+		<h3>${LD.symbol} has been unlocked!</h3>
+		Amount of LP tokens received:<br><b>${LD.total.toFixed(1e18)}</b>
+		<br><h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 }

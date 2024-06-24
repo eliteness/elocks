@@ -49,13 +49,13 @@
 }
 
 .tab button:hover {
-    background-color: #567;
+    background-color: #4567;
     color: #3ff;
     font-weight: bolder;
 }
 
 .tab button.active {
-    background-color: #4567;
+    background-color: #55667799;
     color: #3ff;
     border-bottom: 2px solid;
 }
@@ -366,11 +366,19 @@ button.submit:active{
 	position: relative;
 	top:2px;
 }
-.grayed {
+.grayed,button:disabled {
 	color:#fff;
 	background:linear-gradient(#777,#111) !important;
 }
 
+#spotlight input {
+    width: 90%
+}
+
+button:disabled {
+    cursor: not-allowed;
+    color: #fffa;
+}
 
 @media (max-width: 700px) {
     .topstats {
