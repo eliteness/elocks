@@ -83,11 +83,13 @@
                     <h2>Create eLOCK</h2>
                     <div class="form-item-container">
                         <label for="cl-lp">1. Choose the Pool</label>
-                        <input required class="in-box" id="cl-lp" placeholder="0x1234..5678">
+                        <div class="hint"><a href="https://equalizer.exchange/liquidity" target="_blank">Find a pool on Equalizer?</a></div>
+                        <input required class="in-box" id="cl-lp" placeholder="0x1234..5678" onchange="cl_userbal()">
                     </div>
                     <div class="form-item-container">
                         <label for="cl-amt">2. Enter amount to lock</label>
-                        <input required class="in-box" id="cl-amt" type="number" placeholder="1337.69" step="0.000000000000002" min="0.000000000000002">
+                        <div class="hint" id="cl-amt-bal">Balance: ? LP</div>
+                        <input required class="in-box" id="cl-amt" type="number" placeholder="1337.69" step="0.000000000000000001" min="0.000000000000000001">
                     </div>
                     <div class="wallet-balance" style="display:none;">
                         (<span id="cl-bal" onclick="document.getElementById('cl-amt').value=this.innerHTML">0.00</span> in wallet)

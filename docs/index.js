@@ -250,6 +250,19 @@ async function quote() {
 }
 
 
+async function cl_userbal() {
+	_LP = $("cl-lp").value;
+	if(
+		window.ethereum
+		&& window.ethereum?.selectedAddress != null
+		&& ethers.utils.isAddress(_LP)
+		&& (await (new ethers.Contract(FACTORY,["function isPair(address) public view returns(bool)"],provider)).isPair(_LP))
+	) {
+		let _userlpbal = await (new ethers.Contract(LD.pool,LPABI,signer)).balanceOf(window.ethereum.selectedAddress);
+		$("cl-amt-bal").innerHTML = `Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}`;
+	}
+}
+
 async function createLock_check() {
 
 	/// Info Validation
@@ -573,22 +586,23 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Change Yield Earner</h3>
-				<input required class="in-box" id="ld-earner" placeholder="Enter an address like 0x1234..5678">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-earner" placeholder="Enter an address like 0x1234..5678">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
 				<br><br>
 
 				<h3>Transfer your NFT</h3>
-				<input required class="in-box" id="ld-transfer" placeholder="Enter an address like 0x1234..5678">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-transfer" placeholder="Enter an address like 0x1234..5678">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
 				<br><br>
 
 				<h3>Increase Locked LP Amount</h3>
-				<input required class="in-box" id="ld-increase" type="number" placeholder="Enter LP amounts like 1337.69" step="0.000000000000002" min="0.000000000000002">
+				<input required class="in-box" id="ld-increase" type="number" placeholder="Enter LP amounts like 1337.69" step="0.000000000000000001" min="0.000000000000000001">
 				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
+				<br><span id="ld-increase-bal">Your Balance: ? LPT</span>
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
-				<input required class="in-box" id="ld-extend" type="date">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split("T")[0]}" max="(new Date( Date.now() + (86400e3*365*4) )).toISOString().split("T")[0]" value="(new Date( Date.now() + (86400e3) )).toISOString().split("T")[0]">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
 				<br><br>
 
@@ -603,6 +617,15 @@ async function searchNFT(_NFTID) {
 		`;
 
 		window.location="#spotlight";
+
+		if(window.ethereum && window.ethereum?.selectedAddress != LD.owner) {
+			let _userlpbal = await (new ethers.Contract(LD.pool,LPABI,signer)).balanceOf(window.ethereum.selectedAddress);
+			$("ld-increase-bal").innerHTML = `
+				Your Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}
+				<br>
+				You are not the owner of this eLOCKS NFT. By adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
+			`;
+		}
 
 		/*
 			<br>Quote Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>

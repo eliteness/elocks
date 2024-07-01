@@ -390,6 +390,12 @@ button:disabled {
     color: #fffa;
 }
 
+.hint, .hint * {
+	font-family:light_italic;
+	text-decoration:none; /*1px dashed underline;*/
+	font-size:0.95em;
+}
+
 @media (max-width: 700px) {
     .topstats {
         flex-direction: column;
