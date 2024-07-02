@@ -258,8 +258,8 @@ async function cl_userbal() {
 		&& ethers.utils.isAddress(_LP)
 		&& (await (new ethers.Contract(FACTORY,["function isPair(address) public view returns(bool)"],provider)).isPair(_LP))
 	) {
-		let _userlpbal = await (new ethers.Contract(LD.pool,LPABI,signer)).balanceOf(window.ethereum.selectedAddress);
-		$("cl-amt-bal").innerHTML = `Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}`;
+		_userlpbal = await (new ethers.Contract(_LP,LPABI,signer)).balanceOf(window.ethereum.selectedAddress);
+		$("cl-amt-bal").innerHTML = `Balance: <span onclick="$('cl-amt').value=this.innerHTML">${(Number(_userlpbal)/1e18).toFixed(18)}</span> LP`;
 	}
 }
 
