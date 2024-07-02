@@ -2,12 +2,15 @@
 function $(_) {return document.getElementById(_);}
 let provider= {};
 let signer= {};
-window.addEventListener('load',async function()
-{
-	console.log("waitin for 3 secs..");
-	$("cw_m").innerHTML = "Connecting.. Please wait."
-	setTimeout(async () => { await basetrip(); }, 3000);
-}, false);
+window.addEventListener(
+	'load',
+	async function() {
+		console.log("waitin for 3 secs..");
+		$("cw_m").innerHTML = "Connecting.. Please wait."
+		setTimeout(async () => { await basetrip(); }, 3000);
+	},
+	false
+);
 
 
 function openTab(evt, tabName) {
@@ -22,6 +25,7 @@ function openTab(evt, tabName) {
     }
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
+    //window.location = "#"+tabName;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -210,6 +214,8 @@ async function dexstats() {
 	])
 	TOTAL_SUPPLY = Number(_dsd[0]);
 	$("topstat-total").innerHTML = TOTAL_SUPPLY + " 🔐 eLOCKS";
+	$("search-inp").max = TOTAL_SUPPLY;
+	$("search-inp-hint").innerHTML = `IDs Range from 1 to ${TOTAL_SUPPLY}`;
 
 	return;
 
@@ -233,7 +239,7 @@ async function gubs() {
     else {
     	for(i=0;i<_ubs[0].length;i++) {
     		$("coll-list").innerHTML += `
-				<div onclick="openTab(event, 'Explore');$('search-inp').value=${_ubs[0][i]};searchNFT(${_ubs[0][i]})">
+				<div onclick="eab(event, 'Explore');$('search-inp').value=${_ubs[0][i]};searchNFT(${_ubs[0][i]})">
 					eLOCKS NFT 🔐<br>
 					<span># ${_ubs[0][i]}</span>
 					<br>Tap to Explore!
@@ -312,12 +318,12 @@ async function createLock_check() {
 				:""
 			}
 			<br><br>
-			If the Pool selected has no Gauge Farms yet, then you will Earn all the Trade Fees. If a gauge is established of this pool on a later date, your deposited LP will be automatically staked into the Gauge Farms for earning Higher Rewards for you.
+			If the Pool selected has no Gauge Farms yet, then you will Earn all the Trade Fees. If a gauge is established on this pool at a later date, your deposited LP will be automatically staked into the Gauge Farms for earning Higher Rewards for you.
 			<br><br>
-			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for smaller periods and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to the new Sonic chain when the time comes in the next few month. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards if you setup your eLOCKS NFT to allow you to claim your Rewards even after the transfer. This is done automatically at creation.
-			<br><br><i>Note: Only the Current holder of an eLOCK can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder. As such, when you create an eLOCKS NFT, you become the natural Yield Earner. Unless changed by a later future owner, you will continue to Earn all the Yields.</i>
+			If you wish to take part in the Fantom Sonic Meme Competition, we recommend locking up for smaller periods such as 1 month and tranferring your eLOCKS NFT to the Sonic Community Council so that they can migrate your liquidity to a new eLOCKS NFT on the new Sonic chain when the time comes in the next few months. By transferring to SCC/MemeDAO, you will still continue to Earn all the rewards even after the transfer. By default, we setup your eLOCKS NFT to allow you (the owner) to claim all Rewards from your NFT. Anyone can initiate a claim on your rewards but only you will receive them, allowing someone else to pay the gas costs or help automate your reward claims.
+			<br><br><i>Note: Only the Current holder of an eLOCKS NFT can set the rewards claiming address, which remains intact after transfers unless altered by a Current Holder. As such, when you create an eLOCKS NFT, you become the natural Yield Earner. Unless changed by a later future owner, you will continue to Earn all the Yields. SCC has vowed not to change it for MemeContest2024 participants.</i>
 			<br><br>
-			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like!
+			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like! Furthermore, anyone else can also Gift more LP tokens to your NFT. These features can be used to setup an autocompounder to further maximize your Yields with eLOCKS!
 			<br><br>
 			<button class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</button><br>
 			<button class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</button>
@@ -391,7 +397,7 @@ async function createLock() {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>eLOCKing ${BASE_NAME}</h3>
 
-		${BASE_NAME} to Deposit: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} to Deposit: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -401,7 +407,7 @@ async function createLock() {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Submitted!</h3>
 		<br><h4>Minting new eLOCK ...</h4>
-		${BASE_NAME} Depositing: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} Depositing: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -410,11 +416,15 @@ async function createLock() {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${fornum(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
 	gubs();
+
+
+	document.getElementsByClassName('tablinks')[1].click();
+	window.location="#Manage";
 }
 
 async function searchNFT(_NFTID) {
@@ -562,12 +572,18 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Related Addresses</h3>
-				Owner : <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a>
-				<br>Earner : <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a>
-				<br>Pool : <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a>
-				<br>${ LD.symbol0 } : <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a>
-				<br>${ LD.symbol1 } : <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a>
-				<br>Gauge : <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a>
+				<div style="overflow: auto;">
+					<table>
+						<tbody style="width: 1px;display: block;">
+							<tr><td>Owner </td><td> <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a></td></tr>
+							<tr><td>Earner </td><td> <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a></td></tr>
+							<tr><td>Pool </td><td> <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a></td></tr>
+							<tr><td>${ LD.symbol0 } </td><td> <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a></td></tr>
+							<tr><td>${ LD.symbol1 } </td><td> <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a></td></tr>
+							<tr><td>Gauge </td><td> <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a></td></tr>
+						</tbody>
+					</table>
+				</div>
 
 				<br><br>
 			</div>
@@ -612,11 +628,12 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 			</div>
-
-
 		`;
 
+
+		document.getElementsByClassName('tablinks')[2].click()
 		window.location="#spotlight";
+
 
 		if(window.ethereum && window.ethereum?.selectedAddress != LD.owner) {
 			let _userlpbal = await (new ethers.Contract(LD.pool,LPABI,signer)).balanceOf(window.ethereum.selectedAddress);
@@ -870,7 +887,7 @@ async function LD_increase(_ld) {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>eLOCKing ${BASE_NAME}</h3>
 
-		${BASE_NAME} to Deposit: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} to Deposit: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -880,7 +897,7 @@ async function LD_increase(_ld) {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Submitted!</h3>
 		<br><h4>Adding more LP to eLOCK #${LD.id}</h4>
-		${BASE_NAME} Depositing: <b>${fornum(_oamt,18)}</b><br>
+		${BASE_NAME} Depositing: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -889,7 +906,7 @@ async function LD_increase(_ld) {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Added more LP to eLOCK #${LD.id}!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${fornum(_oamt,18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(_oamt/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);

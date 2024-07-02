@@ -55,7 +55,7 @@
         </div> -->
 
         <div class="topstats">
-            <div class="topstat">
+            <div class="topstat" onclick="document.getElementsByClassName('tablinks')[2].click();window.location='#Explore'">
                 <div id="topstat-total">... eLOCKS</div>
                 <div>Total Financial NFTs Minted</div>
             </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="topstat">
                 <div id="topstat-total">4x Partners</div>
-                <div>Fantom Sonic Ecosystem Integrations</div>
+                <div>Sonic Ecosystem Integrations</div>
             </div>
         </div>
 
@@ -110,7 +110,8 @@
                     <div class="form-item-container">
 						<h2>Search for a NFT by ID</h2>
 						<input required class="in-box" id="search-inp" placeholder="Enter a NFT ID" type="number" step="1" min="1" style="font-size:;max-width:50%">
-						<br><button type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:1em;vertical-align: middle;">Search 🔍</button>
+						<div class="hint" id="search-inp-hint"></div>
+						<button type="submit" class="search-btn" onclick="searchNFT(document.getElementById('search-inp').value)" style="font-size:1em;vertical-align: middle;">Search 🔍</button>
 					</div>
 				</div>
 				<hr><br>
