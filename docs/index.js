@@ -640,7 +640,9 @@ async function searchNFT(_NFTID) {
 			$("ld-increase-bal").innerHTML = `
 				Your Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}
 				<br>
-				You are not the owner of this eLOCKS NFT. By adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
+				<i>
+					You are not the owner of this eLOCKS NFT. By adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
+				</i>
 			`;
 		}
 
@@ -938,11 +940,16 @@ async function LD_extend(_ld) {
 				:""
 		}
 		Current Unlock Date:<br>
-		<b>
-			${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
-			<br>${ timeFormat(new Date(LD.expiry)) }
-		</b>
-		Amount of LP tokens locked:<br><b>${LD.total.toFixed(18)}</b>
+		<i>
+			<b>
+				${ (new Date(LD.expiry)).toISOString().replace("T"," ").split(".")[0] }
+				<br>${ timeFormat(new Date(LD.expiry)) }
+			</b>
+		</i>
+		<br>
+		Amount of LP tokens locked:
+		<br>
+		<i><b>${LD.total.toFixed(18)}</b></i>
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCK.extendDate( BigInt(Math.floor(_END.valueOf()/1e3)) );
