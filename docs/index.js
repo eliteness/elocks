@@ -71,7 +71,7 @@ async function basetrip()
         		blockExplorerUrls: [EXPLORE]
     		}]
 		});
-		window.location.reload
+		window.location.reload()
 	}
 	//DrefreshFarm()
 	//arf()
@@ -239,7 +239,7 @@ async function gubs() {
     else {
     	for(i=0;i<_ubs[0].length;i++) {
     		$("coll-list").innerHTML += `
-				<div onclick="eab(event, 'Explore');$('search-inp').value=${_ubs[0][i]};searchNFT(${_ubs[0][i]})">
+				<div onclick="openTab(event, 'Explore');$('search-inp').value=${_ubs[0][i]};searchNFT(${_ubs[0][i]})">
 					eLOCKS NFT 🔐<br>
 					<span># ${_ubs[0][i]}</span>
 					<br>Tap to Explore!
