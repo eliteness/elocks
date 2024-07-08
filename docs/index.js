@@ -624,7 +624,7 @@ async function searchNFT(_NFTID) {
 
 				<h3>Unlock & Withdraw LP</h3>
 				Reclaim your Locked LP tokens.
-				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Withdraw </button>
+				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_withdraw()"> Withdraw </button>
 				<br><br>
 
 			</div>
