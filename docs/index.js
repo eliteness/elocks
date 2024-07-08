@@ -550,7 +550,8 @@ async function searchNFT(_NFTID) {
 			<div>
 				<img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token0.toLowerCase()}.png"><img style='height:48px;position:relative;top:4px' src="${LOGOS + LD.token1.toLowerCase()}.png">
 				<h3> ${ LD.symbol }</h3>
-				${ LD.name }
+				eLOCK NFT #{LD.id}
+				<br>${ LD.name }
 				<br><br>
 
 				<h3>LP Locked till</h3>
