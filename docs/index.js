@@ -386,7 +386,7 @@ async function createLock() {
 		notice(`
 			<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 			<h3>Approval Completed!</h3>
-			<br>Spending rights of ${Number(_oamt)/1e18} ${BASE_NAME} granted.<br>
+			<br>Spending rights of ${(Number(_oamt)/1e18).toFixed(18)} ${BASE_NAME} granted.<br>
 			<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 			<br><br>
 			Please confirm the next step with your wallet provider now.
@@ -397,7 +397,7 @@ async function createLock() {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>eLOCKing ${BASE_NAME}</h3>
 
-		${BASE_NAME} to Deposit: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		${BASE_NAME} to Deposit: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -407,7 +407,7 @@ async function createLock() {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Submitted!</h3>
 		<br><h4>Minting new eLOCK ...</h4>
-		${BASE_NAME} Depositing: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		${BASE_NAME} Depositing: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -416,7 +416,7 @@ async function createLock() {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -887,7 +887,7 @@ async function LD_increase(_ld) {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>eLOCKing ${BASE_NAME}</h3>
 
-		${BASE_NAME} to Deposit: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		${BASE_NAME} to Deposit: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
@@ -897,7 +897,7 @@ async function LD_increase(_ld) {
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Submitted!</h3>
 		<br><h4>Adding more LP to eLOCK #${LD.id}</h4>
-		${BASE_NAME} Depositing: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		${BASE_NAME} Depositing: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -906,7 +906,7 @@ async function LD_increase(_ld) {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Added more LP to eLOCK #${LD.id}!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(_oamt/1e18).toFixed(18)}</b><br>
+		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
