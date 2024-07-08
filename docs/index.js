@@ -613,8 +613,8 @@ async function searchNFT(_NFTID) {
 
 				<h3>Increase Locked LP Amount</h3>
 				<input required class="in-box" id="ld-increase" type="number" placeholder="Enter LP amounts like 1337.69" step="0.000000000000000001" min="0.000000000000000001">
-				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
 				<br><span id="ld-increase-bal">Your Balance: ? LPT</span>
+				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
@@ -640,9 +640,9 @@ async function searchNFT(_NFTID) {
 			$("ld-increase-bal").innerHTML = `
 				Your Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}
 				<br>
-				<i>
+				<div class="hint">
 					You are not the owner of this eLOCKS NFT. By adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
-				</i>
+				</div>
 			`;
 		}
 
