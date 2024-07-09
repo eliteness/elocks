@@ -288,7 +288,7 @@ async function createLock_check() {
 		return;
 	}
 	else{
-		notice(`Recollecting Pool Details..`)
+		notice(`Recollecting Pool Details..`);
 		await sleep(3000);
 		if(await (new ethers.Contract(FACTORY,["function isPair(address) public view returns(bool)"],provider)).isPair(_LP)) {
 			notice(`Equalizer Pair detected!`);
@@ -300,16 +300,19 @@ async function createLock_check() {
 
 	}
 
+	console.log(2, _LP);
+
 	_oamt = $("cl-amt").value;
 	if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid LP amount!`); return;}
 	_oamt = BigInt(Math.floor(_oamt * 1e18));
 
-	;
+
+	console.log(3, _oamt);
 
 	_END = new Date($("cl-end").value);
 
 
-	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
+	console.log(4, _END)
 
 
 	if(_END.valueOf() < Date.now() + 100e3 ) {
