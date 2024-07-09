@@ -303,6 +303,9 @@ async function createLock_check() {
 	_END = new Date($("cl-end").value);
 
 
+	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
+
+
 	if(_END.valueOf() < Date.now() + 100e3 ) {
 		notice(`
 			<h3>Lock period has passed!</h3>
@@ -312,8 +315,6 @@ async function createLock_check() {
 		`);
 		return;
 	}
-
-	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
 
 	else if(_END.valueOf() > Date.now() + 100e3) {
 		notice(`
