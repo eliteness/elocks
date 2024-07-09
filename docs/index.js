@@ -275,6 +275,8 @@ async function cl_userbal() {
 }
 
 async function createLock_check() {
+	notice(`Recollecting Pool Details..`);
+	await sleep(3000);
 	if(window.ethereum?.selectedAddress?false:true) {
 		notice(`Wallet not ready. Please wait 10 seconds and retry.`);
 		return;
@@ -284,13 +286,13 @@ async function createLock_check() {
 	/// Info Validation
 
 	_LP = $("cl-lp").value;
+
+	console.log(1, _LP);
 	if(!ethers.utils.isAddress(_LP)){
 		notice(`Incorrect LP Address Input!<br>${_LP}`);
 		return;
 	}
 	else{
-		notice(`Recollecting Pool Details..`);
-		await sleep(3000);
 		if(await (new ethers.Contract(FACTORY,["function isPair(address) public view returns(bool)"],provider)).isPair(_LP)) {
 			notice(`Equalizer Pair detected!`);
 		}
