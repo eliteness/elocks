@@ -191,6 +191,7 @@ function fornum2(n,d)
 function notice(c) {
 	window.location = "#note"
 	$("content1").innerHTML = c
+	console.log(c)
 }
 
 async function sleep(ms) {
