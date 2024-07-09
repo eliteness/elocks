@@ -271,6 +271,7 @@ async function cl_userbal() {
 
 async function createLock_check() {
 
+	console.log(0, signer, window.ethereum.selectedAddress)
 	/// Info Validation
 
 	_LP = $("cl-lp").value;
@@ -338,6 +339,8 @@ async function createLock() {
 	/// Welcome, anon!
 	/// notice(`Checking wallet..`);
 	/// await cw();
+
+	console.log(2, signer, _LP, window.ethereum.selectedAddress, _END, _oamt)
 
 
 	/// Business end
