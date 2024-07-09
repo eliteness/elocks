@@ -203,9 +203,9 @@ ELOCKSABI = [{"anonymous": false,"inputs": [{"indexed": true,"internalType": "ad
 
 async function dexstats() {
 
-	$("cl-end").min = (new Date( Date.now() + ( 100e3) )).toISOString().split("T")[0];
-	$("cl-end").max = (new Date( Date.now() + (86400e3*365*4) )).toISOString().split("T")[0];
-	$("cl-end").value=(new Date( Date.now() + (86400e3) )).toISOString().split("T")[0];
+	$("cl-end").min = (new Date( Date.now() + ( 100e3) )).toISOString().split('T')[0];
+	$("cl-end").max = (new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0];
+	$("cl-end").value=(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0];
 
 	_ELOCKS = new ethers.Contract(LOCKER_ROOM, LPABI, provider);
 
@@ -270,8 +270,12 @@ async function cl_userbal() {
 }
 
 async function createLock_check() {
+	if(window.ethereum?.selectedAddress?false:true) {
+		notice(`Wallet not ready. Please wait 10 seconds and retry.`);
+		return;
+	}
 
-	console.log(0, signer, window.ethereum.selectedAddress)
+	console.log(0, window.ethereum.selectedAddress, signer)
 	/// Info Validation
 
 	_LP = $("cl-lp").value;
@@ -309,6 +313,7 @@ async function createLock_check() {
 		return;
 	}
 
+	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
 
 	else if(_END.valueOf() > Date.now() + 100e3) {
 		notice(`
@@ -340,7 +345,7 @@ async function createLock() {
 	/// notice(`Checking wallet..`);
 	/// await cw();
 
-	console.log(2, signer, _LP, window.ethereum.selectedAddress, _END, _oamt)
+	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
 
 
 	/// Business end
@@ -622,7 +627,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
-				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split("T")[0]}" max="(new Date( Date.now() + (86400e3*365*4) )).toISOString().split("T")[0]" value="(new Date( Date.now() + (86400e3) )).toISOString().split("T")[0]">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split('T')[0]}" max="(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]" value="(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
 				<br><br>
 
@@ -735,7 +740,7 @@ async function LD_claimRewards(_ld) {
 	notice(`
 		<h3>Claiming Gauge Farming Rewards</h3>
 		<b>${_ld.name}</b>
-		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0].toFixed(LD.drewards[0].toString().length-1):0 } ${GAUGE_REWARD_0}
 		<h4><u><i>Please Confirm this transaction in your wallet!</i></u></h4>
 	`);
 	let _tr = await _ELOCK.claimRewards();
@@ -744,7 +749,7 @@ async function LD_claimRewards(_ld) {
 
 		<h3>Claiming Gauge Farming Rewards</h3>
 		<b>${_ld.name}</b>
-		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0].toFixed(LD.drewards[0].toString().length-1):0 } ${GAUGE_REWARD_0}
 		<br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -754,7 +759,7 @@ async function LD_claimRewards(_ld) {
 		<h3>Gauge Farming Rewards Claimed!</h3>
 		<b>${_ld.name}</b>
 
-		<br><br>${ LD.earnings[0]?LD.earnings[0]:0 } EQUAL
+		<br><br>${ LD.earnings[0]?LD.earnings[0].toFixed(LD.drewards[0].toString().length-1):0 } ${GAUGE_REWARD_0}
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
