@@ -619,7 +619,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
-				${LD.srewards[0]?LD.srewards[0]:"Unknown"} : ${ LD.crewards[0]?(LD.crewards[0]/LD.drewards[0]).toFixed(Math.log10(LD.drewards[0])):0 }
+				${LD.srewards[0]?LD.srewards[0]:"Unknown Token"} : ${ LD.crewards[0]?(LD.crewards[0]/(LD.drewards[0]?LD.dewards[0]:1)).toFixed(Math.log10(LD.drewards[0])):0 }
 				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 				<br><br>
 
@@ -640,7 +640,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
-				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split('T')[0]}" max="(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]" value="(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split('T')[0]}" max="${(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]}" value="${(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]}">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
 				<br><br>
 
@@ -663,7 +663,7 @@ async function searchNFT(_NFTID) {
 				Your Balance: ${(Number(_userlpbal)/1e18).toFixed(18)}
 				<br>
 				<div class="hint">
-					You are not the owner of this eLOCKS NFT. By adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
+					If you are not the owner of this eLOCKS NFT, by adding LP tokens to it, you are gifting LPs to the owner of this Lock (${LD.owner})
 				</div>
 			`;
 		}
