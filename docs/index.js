@@ -222,6 +222,19 @@ async function dexstats() {
 	$("search-inp").max = TOTAL_SUPPLY;
 	$("search-inp-hint").innerHTML = `IDs Range from 1 to ${TOTAL_SUPPLY}`;
 
+	uspid=new URLSearchParams(window.location.search).get("id");
+	if(
+		isFinite(uspid)
+		&& !(uspid == null)
+		&& uspid <= TOTAL_SUPPLY
+		&& uspid > 0
+	) {
+		uspid = Math.floor(uspid);
+		//openTab(null, 'Explore');
+		$('search-inp').value = uspid;
+		searchNFT(uspid);
+	}
+
 	return;
 
 }
@@ -539,7 +552,7 @@ async function searchNFT(_NFTID) {
 			earnings:	[] ,
 
 			refagent:	_li[7][0],
-			refpercent:	Number(_li[7][1])/10,
+			refpercent:	Number(_li[7][1])/1e18*100,
 			/*
 			name:		_ens[0] ,
 			symbol:		_ens[1] ,
@@ -603,6 +616,9 @@ async function searchNFT(_NFTID) {
 							<tr><td>${ LD.symbol0 } </td><td> <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a></td></tr>
 							<tr><td>${ LD.symbol1 } </td><td> <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a></td></tr>
 							<tr><td>Gauge </td><td> <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a></td></tr>
+							<tr><td>Referrer </td><td> <a href='${ EXPLORE+"address/"+LD.refagent }' target="_blank">${ LD.refagent }</a></td></tr>
+							<tr><td>Ref. fee </td><td>${ (LD.refpercent)}%</td></tr>
+							<tr><td>Speciality </td><td> ${LD.id<31?"Eligible for Cashback Points on Sonic! 🪂":"-"} </td></tr>
 						</tbody>
 					</table>
 				</div>
