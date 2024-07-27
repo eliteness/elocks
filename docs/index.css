@@ -35,7 +35,7 @@
 }
 
 .tab button {
-    background-color: inherit;
+    background-color: #4564;
     border: none;
     outline: none;
     cursor: pointer;
@@ -197,18 +197,14 @@ footer{
 }
 
 .headline {
-	background: -webkit-linear-gradient(90deg, #0ff, #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 
     font-size: 1.25em;
-    font-weight: bold;
 	margin-bottom:20px;
 }
 
 .headline-keyword {
     font-size: 2em;
-    font-weight: bold;
+    font-family: bold;
 }
 
 .page-heading {
@@ -230,7 +226,7 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 60px;
+    margin: 0 -10px 60px;
 }
 
 .topstat {

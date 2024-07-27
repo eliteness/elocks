@@ -450,7 +450,7 @@ async function createLock() {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Order Completed!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
@@ -656,7 +656,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
-				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( Date.now() + ( 100e3) )).toISOString().split('T')[0]}" max="${(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]}" value="${(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]}">
+				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( LD.expiry )).toISOString().split('T')[0]}" max="${(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]}" value="${(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]}">
 				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
 				<br><br>
 
@@ -946,7 +946,7 @@ async function LD_increase(_ld) {
 	notice(`
 		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png">
 		<h3>Added more LP to eLOCK #${LD.id}!</h3>
-		<img style='height:20px;position:relative;top:4px' src="${BASE_LOGO}"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
+		<img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][5].toLowerCase()}.png"><img style='height:32px;position:relative;top:4px' src="${LOGOS + al[3][6].toLowerCase()}.png"> ${BASE_NAME} eLOCKed: <b>${(Number(_oamt)/1e18).toFixed(18)}</b><br>
 		<br><br>
 		<h4><a target="_blank" href="${EXPLORE}/tx/${_tr.hash}">View on Explorer</a></h4>
 	`);
