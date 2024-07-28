@@ -249,6 +249,10 @@ footer{
     font-size: 1em;
 }
 
+.topstat:hover {
+	cursor:pointer;
+}
+
 .c2a{
 	/*! max-width:500px; */
 	margin:auto auto;
