@@ -551,6 +551,9 @@ async function createLock() {
 
 async function searchNFT(_NFTID) {
 	console.log("looking for ", _NFTID);
+	const url = new URL(window.location.href);
+	url.searchParams.set("id", _NFTID);
+	window.history.pushState({ path: url.href }, '', url.href);
 	if(!isFinite(_NFTID) || _NFTID < 1){notice(`Invalid eLOCKS NFT ID!`); return;}
 	_NFTID = Math.floor(_NFTID);
 
