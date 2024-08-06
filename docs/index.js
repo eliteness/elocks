@@ -667,7 +667,7 @@ async function searchNFT(_NFTID) {
 
 		// normalize earnings
 		for(i=0;i<LD.trewards.length;i++) {
-			LD.earnings[i] = (LD.crewards[i] || 0) / LD.drewards[i];
+			LD.earnings[i] = (LD.arewards[i] || 0) / LD.drewards[i];
 		}
 
 
