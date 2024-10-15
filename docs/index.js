@@ -409,6 +409,7 @@ async function createLock_check() {
 	_oamt = $("cl-amt").value;
 	if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid LP amount!`); return;}
 	_oamt = BigInt(Math.floor(_oamt * 1e18));
+	_oamt = _oamt - _oamt % 1000000n;
 
 
 	console.log(3, _oamt);
@@ -459,6 +460,7 @@ async function createLock() {
 	/// notice(`Checking wallet..`);
 	/// await cw();
 
+	_oamt = _oamt - _oamt % 1000000n;
 	console.log(2, _LP, window.ethereum.selectedAddress, _END, _oamt, signer)
 
 
@@ -959,6 +961,7 @@ async function LD_increase(_ld) {
 	_oamt = $("ld-increase").value;
 	if(!isFinite(_oamt) || _oamt<1/1e18){notice(`Invalid LP amount!`); return;}
 	_oamt = BigInt(Math.floor(_oamt * 1e18));
+	_oamt = _oamt - _oamt % 1000000n;
 
 	/// Business end
 	_BASE = new ethers.Contract(LD.pool, LPABI, signer);
