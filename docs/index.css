@@ -401,6 +401,18 @@ button:disabled {
     text-align: left;
 }
 
+#spotlight-svg svg {
+	width: calc(min(75vw,75vh));
+	height:calc(min(75vw,75vh));
+}
+
+#spotlight-svg svg * {
+    font-family: sans-serif !important;
+}
+
+#spotlight-svg svg .mo {
+    font-family: monospace !important;
+}
 @media (max-width: 700px) {
     .topstats {
         flex-direction: column;

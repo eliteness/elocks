@@ -728,7 +728,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
-				${LD.srewards[0]?LD.srewards[0]:"Unknown Token"} : ${ LD.crewards[0]?(LD.crewards[0]/(LD.drewards[0]?LD.drewards[0]:1)).toFixed(Math.log10(LD.drewards[0]?LD.drewards[0]:1)):0 }
+				${LD.srewards[0]?GAUGE_REWARD_0:"Unknown Token"} : ${ LD.crewards[0]?(LD.crewards[0]/(LD.drewards[0]?LD.drewards[0]:1)).toFixed(Math.log10(LD.drewards[0]?LD.drewards[0]:1)):0 }
 				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 				<br><br>
 
@@ -776,6 +776,22 @@ async function searchNFT(_NFTID) {
 				</div>
 			`;
 		}
+
+		_ELOCKS.tokenURI(_NFTID).then(uri=>{
+			let jo=JSON.parse(atob(uri.replace("data:application/json;base64,","")));
+			let so=(atob(jo.image.replace("data:image/svg+xml;base64,","")));
+			$("spotlight-svg").innerHTML=
+				"<br><br><h3>On-Chain Fully Dynamic Real-time NFT Artwork</h3>"
+				+ so
+					.replaceAll("ð","🔐")
+					.replaceAll("â¢","⇢")
+					.replaceAll("sans-serif","")
+				+ "<p style='font-family:light;font-size:0.8em;'>View it on your Favorite NFT market, or add it to your Favorite wallet!"
+				+ "<br>"
+				+ LOCKER_ROOM
+				//+ "<br><br>Now also available as LockScreen Wallpaper for Ledger Stax & KeyStone Pro!"
+				+ "</p>";
+		})
 
 		/*
 			<br>Quote Token : <a href='${ EXPLORE+"address/"+LD. }' target="_blank">${ LD..substr(0,10)+"-"+ LD..substr(-8)}</a>
