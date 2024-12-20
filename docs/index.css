@@ -148,7 +148,8 @@ footer{
 }
 
 .topnav {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto;
     justify-content: space-between;
     align-items: center;
     padding: 10px 30px;
@@ -174,6 +175,33 @@ footer{
     margin: 0;
 }
 
+.topnav-chain, .chain-selector {
+	border-radius:10px;
+	cursor:pointer;
+	padding:5px 8px;
+	background:#063a5d;
+	color:#fff;
+	margin: auto auto 10px auto;
+}
+
+.topnav-chain img {
+	width:20px;
+	height:20px;
+	vertical-align:middle;
+}
+/*
+.topnav-chain span {
+	position:relative;
+	top: -4px;
+}
+*/
+.chain-selector {
+    margin: 10px auto;
+}
+.chain-selector img {
+    width: 32px;
+    vertical-align: bottom;
+}
 .subnav {
     display: none;
     text-align: center;
@@ -434,6 +462,14 @@ button:disabled {
         width: 90%;
     }
 
+	.topnav {
+    	display: grid;
+    	grid-template-columns: auto auto auto;
+	}
+
+	.topnav-chain {
+		margin: auto
+	}
 	button.submit {
 		margin: 5px auto;
 		padding: 10px;
