@@ -692,6 +692,8 @@ async function searchNFT(_NFTID) {
 
 		}
 
+		if(LD.expiry>Date.now()+(86400*36500e3)) { LD = Date.now()+(86400*36500e3)}
+
 		// normalize earnings
 		for(i=0;i<LD.trewards.length;i++) {
 			LD.earnings[i] = (LD.arewards[i] || 0) / LD.drewards[i];
@@ -1119,7 +1121,14 @@ async function LD_extend(_ld) {
 				<br>${ timeFormat(new Date(LD.expiry)) }
 			</b>
 		</i>
-		<br>
+		<br><br>
+		<h3>Extending expiry of eLOCKS NFT #${LD.id}</h3>
+		New Unlock Date:<br>
+		<b>
+			${ (new Date(_END.valueOf())).toISOString().replace("T"," ").split(".")[0] }
+			<br>${ timeFormat(new Date(_END.valueOf())) }
+		</b>
+		<br><br>
 		Amount of LP tokens locked:
 		<br>
 		<i><b>${LD.total.toFixed(18)}</b></i>
