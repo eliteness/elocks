@@ -692,7 +692,7 @@ async function searchNFT(_NFTID) {
 
 		}
 
-		if(LD.expiry>Date.now()+(86400*36500e3)) { LD = Date.now()+(86400*36500e3)}
+		if(LD.expiry>Date.now()+(86400*36500e3)) { LD.expiry = Date.now()+(86400*36500e3)}
 
 		// normalize earnings
 		for(i=0;i<LD.trewards.length;i++) {
