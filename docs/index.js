@@ -755,7 +755,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
-				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ (e/Math.log10(LD.drewards[i])).toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
+				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ (e/(LD.drewards[i])).toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
 				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 				<br><br>
 
