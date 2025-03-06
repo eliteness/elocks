@@ -662,11 +662,11 @@ async function searchNFT(_NFTID) {
 			res1:		Number(_li[1][9]) /Number(_li[1][7]) ,
 			pooltotal:	Number(_li[1][10])/1e18 ,
 
-			crewards:	_li[2] ,
-			trewards:	_li[3] ,
-			arewards:	_li[4] ,
-			drewards:	_li[5] ,
-			srewards:	_li[6] ,
+			crewards:	_li[2].map(i=>Number(i)) ,  // claimable
+			trewards:	_li[3] ,					// address
+			arewards:	_li[4].map(i=>Number(i)) ,	//
+			drewards:	_li[5].map(i=>Number(i)) ,	// decimals
+			srewards:	_li[6].map(i=>Number(i)) ,	// symbols
 			earnings:	[] ,
 
 			refagent:	_li[7][0],
