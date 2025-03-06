@@ -666,7 +666,7 @@ async function searchNFT(_NFTID) {
 			trewards:	_li[3] ,					// address
 			arewards:	_li[4].map(i=>Number(i)) ,	//
 			drewards:	_li[5].map(i=>Number(i)) ,	// decimals
-			srewards:	_li[6].map(i=>Number(i)) ,	// symbols
+			srewards:	_li[6] ,	// symbols
 			earnings:	[] ,
 
 			refagent:	_li[7][0],
@@ -755,7 +755,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
-				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
+				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ (e/Math.log10(LD.drewards[i])).toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
 				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 				<br><br>
 
