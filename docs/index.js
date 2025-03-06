@@ -755,7 +755,7 @@ async function searchNFT(_NFTID) {
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
-				${LD.srewards[0]?GAUGE_REWARD_0:"Unknown Token"} : ${ LD.crewards[0]?(LD.crewards[0]/(LD.drewards[0]?LD.drewards[0]:1)).toFixed(Math.log10(LD.drewards[0]?LD.drewards[0]:1)):0 }
+				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ e.toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
 				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
 				<br><br>
 
