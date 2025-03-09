@@ -733,6 +733,7 @@ async function searchNFT(_NFTID) {
 							<tr><td>Owner </td><td> <a href='${ EXPLORE+"address/"+LD.owner }' target="_blank">${ LD.owner }</a></td></tr>
 							<tr><td>Earner </td><td> <a href='${ EXPLORE+"address/"+LD.earner }' target="_blank">${ LD.earner }</a></td></tr>
 							<tr><td>Pool </td><td> <a href='${ EXPLORE+"address/"+LD.pool }' target="_blank">${ LD.pool }</a></td></tr>
+							<tr><td>Locker </td><td> <a href='${ EXPLORE+"address/"+LD.locker }' target="_blank">${ LD.locker }</a></td></tr>
 							<tr><td>${ LD.symbol0 } </td><td> <a href='${ EXPLORE+"address/"+LD.token0 }' target="_blank">${ LD.token0 }</a></td></tr>
 							<tr><td>${ LD.symbol1 } </td><td> <a href='${ EXPLORE+"address/"+LD.token1 }' target="_blank">${ LD.token1 }</a></td></tr>
 							<tr><td>Gauge </td><td> <a href='${ EXPLORE+"address/"+LD.gauge }' target="_blank">${ LD.gauge }</a></td></tr>
