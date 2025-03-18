@@ -854,7 +854,7 @@ async function searchNFT(_NFTID) {
 		*/
 }
 
-async function LD_toggleStaking(_ld) {
+async function LD_toggleStaked(_ld) {
 	_ld = LD; //JSON.parse(_ld);
 
 	/// Welcome, anon!
