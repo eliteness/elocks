@@ -261,7 +261,8 @@ async function dexstats() {
 	}
 
 	llama = await (await fetch("https://api.llama.fi/protocol/elocks")).json();
-	let tvl = (llama.currentChainTvls.Fantom).toLocaleString(undefined, {maximumFractionDigits:0});
+	//let tvl = (llama.currentChainTvls.Fantom).toLocaleString(undefined, {maximumFractionDigits:0});
+	let tvl = ( llama.tvl[llama.tvl.length-1].totalLiquidityUSD ).toLocaleString(undefined, {maximumFractionDigits:0});
 	$("topstat-tvl").innerHTML = "$" + tvl;
 
 
@@ -269,32 +270,32 @@ async function dexstats() {
 	echart1 = echarts.init(document.getElementById('chart1'),'dark');
 
 
-// Sample raw data
-const rawData = llama.tokensInUsd;
+	// Sample raw data
+	const rawData = llama.tokensInUsd;
 
-// Extract unique tokens
-const tokensSet = new Set();
-rawData.forEach(data => {
-    Object.keys(data.tokens).forEach(token => tokensSet.add(token));
-});
-const tokens = Array.from(tokensSet);
+	// Extract unique tokens
+	const tokensSet = new Set();
+	rawData.forEach(data => {
+    	Object.keys(data.tokens).forEach(token => tokensSet.add(token));
+	});
+	const tokens = Array.from(tokensSet);
 
-// Transform data into series format
-const seriesData = tokens.map(token => ({
-    name: token,
-    type: 'line',
-    stack: 'total',
-    smooth: true,
-    lineStyle: { width: 0 },
-    showSymbol: false,
-    label: { position: 'top' },
-    areaStyle: { opacity: 1 },
-    emphasis: { focus: 'series' },
-    data: rawData.map(data => ({
-        name: new Date(data.date * 1000).toLocaleDateString(),
-        value: Math.ceil(data.tokens[token]) || 0
-    }))
-}));
+	// Transform data into series format
+	const seriesData = tokens.map(token => ({
+    	name: token,
+    	type: 'line',
+    	stack: 'total',
+    	smooth: true,
+    	lineStyle: { width: 0 },
+    	showSymbol: false,
+    	label: { position: 'top' },
+    	areaStyle: { opacity: 1 },
+    	emphasis: { focus: 'series' },
+    	data: rawData.map(data => ({
+        	name: new Date(data.date * 1000).toLocaleDateString(),
+        	value: Math.ceil(data.tokens[token]) || 0
+    	}))
+	}));
 
 
 
