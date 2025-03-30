@@ -215,6 +215,11 @@ function chainSwitcher() {
         		<img src="https://ftm.guru/icons/equal.png"/>
         		<span>Equalizer on Sonic</span>
 			</div>
+			<div class="chain-selector" onclick="window.location='./sonic-swapx'">
+        		<img src="https://ftm.guru/icons/ftm.svg"/>
+        		<img src="https://ftm.guru/icons/swapx.png"/>
+        		<span>SwapX on Sonic</span>
+			</div>
 			<div class="chain-selector" onclick="window.location='./fantom-equalizer'">
         		<img src="https://ftm.guru/icons/ftm.svg"/>
         		<img src="https://ftm.guru/icons/equal.png"/>
