@@ -60,6 +60,7 @@
 
 
 		<h2 align="center" style="font-family:bold">eLOCKS <span style="font-family:regular;color:#fff;text-shadow: 0px 0px 2px aqua;">Earn Yield</span> on your Locked Liquidity!</h2>
+		<div style="font-size:10vw" align="center" id="topstat-tvl"><i>Loading TVL..</i></div>
 
 		<br><br>
 
@@ -72,6 +73,7 @@
 
 
 
+        <div id="chart1" style="width: 100%;height:100%;min-height: 480px; margin:50px auto">
 
 
 
@@ -111,7 +113,7 @@
         			{
           			"name": "SwapX eLOCKS",
           			"description": "Earn 80% of all Trade Fee generated on your Locked Liquidity.<br><br>Owners of eLOCKS can also stake their Liquidity tokens right from within their eLOCKS on our App to earn $SWPX emissions generated from the Weekly Voting on SwapX!<br><br>When staked, your Trade Fee is used as Bribes to further enhance your SWPX yield!<br><br><b>🔗 swapx.fi</b>",
-          			"url": "https://eliteness.network/bridge/elite",
+          			"url": "https://eliteness.network/elocks/sonic-swapx",
           			"image": "https://ftm.guru/icons/swapx.png",
           			"background": "linear-gradient(310deg, #000,#175,#000)",
           			"subicons" : [ "sonic" ],
@@ -175,84 +177,177 @@
 
 
 	document.addEventListener('DOMContentLoaded', function() {
-    	dexstats();
     	paintTiles(DATA);
+    	dexstats();
 	});
 
 	async function dexstats() {
+		console.log("ll")
+		llama = await (await fetch("https://api.llama.fi/protocol/elocks")).json();
+		//let tvl = (llama.currentChainTvls.Fantom).toLocaleString(undefined, {maximumFractionDigits:0});
+		//https://api.llama.fi/tvl/guru-network-dao
+
+		let tvl = ( llama.tvl[llama.tvl.length-1].totalLiquidityUSD ).toLocaleString(undefined, {maximumFractionDigits:0});
+		$("topstat-tvl").innerHTML = "$" + tvl + " in TVL";
+
+
+
+		echart1 = echarts.init(document.getElementById('chart1'),'dark');
+
+
+		// Sample raw data
+		const rawData = llama.tokensInUsd;
+
+		// Extract unique tokens
+		const tokensSet = new Set();
+		rawData.forEach(data => {
+    		Object.keys(data.tokens).forEach(token => tokensSet.add(token));
+		});
+		const tokens = Array.from(tokensSet);
+
+		// Transform data into series format
+		const seriesData = tokens.map(token => ({
+    		name: token,
+    		type: 'line',
+    		stack: 'total',
+    		smooth: true,
+    		lineStyle: { width: 0 },
+    		showSymbol: false,
+    		label: { position: 'top' },
+    		areaStyle: { opacity: 1 },
+    		emphasis: { focus: 'series' },
+    		data: rawData.map(data => ({
+        		name: new Date(data.date * 1000).toLocaleDateString(),
+        		value: Math.ceil(data.tokens[token]) || 0
+    		}))
+		}));
+
+
+
+		// ECharts option object
+
+
+		option = {
+  		//color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+  		title: { text: ('$' + tvl + ' of Assets Locked in eLOCKS'), textStyle: { color: '#fff' } },
+  		darkMode: true,
+  		backgroundColor: 'transparent',
+  		toolbox: { feature: { saveAsImage: {} } },
+  		grid: { left: '3%', right: '4%', bottom: '10%', containLabel: true },
+  		tooltip: {
+    		trigger: 'axis',
+    		axisPointer: {},
+  		},
+  		legend: {
+    		data: tokens,
+    		bottom: 0 ,
+    		type: 'scroll',
+    		textStyle: { color: '#fff' },
+    		itemStyle: {
+    		/*	color: inherit,
+    			opacity: inherit,
+    			borderColor: inherit,
+    			borderWidth: auto,
+    			borderCap: inherit,
+    			borderJoin: inherit,
+    			borderDashOffset: inherit,
+    			borderMiterLimit: inherit
+    		*/
+    		}
+  		},
+  		xAxis: [
+    		{
+      		type: 'category',
+      		boundaryGap: false,
+      		data: rawData.map(data => new Date(data.date * 1000).toLocaleDateString())
+    		}
+  		],
+  		yAxis: [
+    		{
+      		type: 'value'
+    		}
+  		],
+  		series: seriesData
+		};
+
+
+		echartOption1 = option;
+		echart1.setOption(echartOption1);
+
 		return;
 	}
 
 	function paintTiles(data) {
-  	const container = document.createElement('div');
+  		const container = document.createElement('div');
 
-  	data.categories.forEach(category => {
-    	const categoryTitle = document.createElement('h2');
-    	categoryTitle.className = 'cat-h2';
-    	categoryTitle.textContent = category.title;
-    	container.appendChild(categoryTitle);
+  		data.categories.forEach(category => {
+    		const categoryTitle = document.createElement('h2');
+    		categoryTitle.className = 'cat-h2';
+    		categoryTitle.textContent = category.title;
+    		container.appendChild(categoryTitle);
 
-    	const tilesWrapper = document.createElement('div');
-    	tilesWrapper.className = 'wrapper-tiles';
+    		const tilesWrapper = document.createElement('div');
+    		tilesWrapper.className = 'wrapper-tiles';
 
-    	category.tiles.forEach(tile => {
-      	const tileDiv = document.createElement('div');
-      	tileDiv.className = 'wrapper-tile';
+    		category.tiles.forEach(tile => {
+      		const tileDiv = document.createElement('div');
+      		tileDiv.className = 'wrapper-tile';
 
-      	const tileColor = (tile.color) ? tile.color : "white";
-      	tileDiv.style.background = tile.background;
-      	tileDiv.style.color = tileColor;
+      		const tileColor = (tile.color) ? tile.color : "white";
+      		tileDiv.style.background = tile.background;
+      		tileDiv.style.color = tileColor;
 
-      	if(tile.url) {
-        	tileDiv.onclick = () => window.open(tile.url);
-      	}
+      		if(tile.url) {
+        		tileDiv.onclick = () => window.open(tile.url);
+      		}
 
-      	const tileTitle = document.createElement('div');
-      	tileTitle.className = 'wrapper-tile-title';
-
-
-      	if(tile.image) {
-        	const tileImage = document.createElement('img');
-        	tileImage.src = tile.image;
-        	//tileImage.alt = tile.name;
-        	tileTitle.appendChild(tileImage);
-      	}
-
-      	const titleText = document.createElement('div');
-      	titleText.innerHTML = tile.name ? `<div class="subhead-big" style="color:${tileColor};">${tile.name}</div>` : "";
+      		const tileTitle = document.createElement('div');
+      		tileTitle.className = 'wrapper-tile-title';
 
 
-	  	const chainsWrapper = document.createElement('div');
-      	if(tile.subicons) {
-			chainsWrapper.className = 'subhead-small wrapper-chains';
-        	tile.subicons.forEach(i => {
-          	const chainImg = document.createElement('img');
-          	chainImg.src = ICONS[i];
-          	chainsWrapper.appendChild(chainImg);
-        	});
-        	titleText.appendChild(chainsWrapper);
-      	}
+      		if(tile.image) {
+        		const tileImage = document.createElement('img');
+        		tileImage.src = tile.image;
+        		//tileImage.alt = tile.name;
+        		tileTitle.appendChild(tileImage);
+      		}
 
-      	tileTitle.appendChild(titleText);
+      		const titleText = document.createElement('div');
+      		titleText.innerHTML = tile.name ? `<div class="subhead-big" style="color:${tileColor};">${tile.name}</div>` : "";
 
 
-      	tileDiv.appendChild(tileTitle);
+	  		const chainsWrapper = document.createElement('div');
+      		if(tile.subicons) {
+				chainsWrapper.className = 'subhead-small wrapper-chains';
+        		tile.subicons.forEach(i => {
+          		const chainImg = document.createElement('img');
+          		chainImg.src = ICONS[i];
+          		chainsWrapper.appendChild(chainImg);
+        		});
+        		titleText.appendChild(chainsWrapper);
+      		}
+
+      		tileTitle.appendChild(titleText);
 
 
-      	const tileDesc = document.createElement('div');
-      	tileDesc.className = 'wrapper-desc';
-      	tileDesc.style.color = tileColor;
-      	tileDesc.innerHTML = tile.description ? tile.description : "" ;
+      		tileDiv.appendChild(tileTitle);
 
-      	tileDiv.appendChild(tileDesc);
-      	tilesWrapper.appendChild(tileDiv);
-    	});
 
-    	container.appendChild(tilesWrapper);
-  	});
+      		const tileDesc = document.createElement('div');
+      		tileDesc.className = 'wrapper-desc';
+      		tileDesc.style.color = tileColor;
+      		tileDesc.innerHTML = tile.description ? tile.description : "" ;
 
-  	document.getElementById('mainstage').appendChild(container);
+      		tileDiv.appendChild(tileDesc);
+      		tilesWrapper.appendChild(tileDiv);
+    		});
+
+    		container.appendChild(tilesWrapper);
+  		});
+
+  		document.getElementById('mainstage').appendChild(container);
 	}
+
 	</script>
 
 	<style>
