@@ -54,7 +54,7 @@ async function basetrip()
 		if((typeof Number(window.ethereum.chainId) == "number")){$("cw_m").innerHTML = "Wrong network! Switch from " + Number(window.ethereum.chainId)+" to "+CHAINID}
 		provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 		signer = provider.getSigner()
-		$("connect").innerHTML=`Wallet not found.<br><br><button onclick="window.location.reload()" id="btn-connect">Retry?</button>`;
+		$("connect").innerHTML=`Wallet not found.<br><button onclick="window.location.reload()" id="btn-connect">Retry?</button>`;
 	}
 	if(Number(window.ethereum.chainId) != null &&(window.ethereum.chainId!=CHAINID))
 	{
@@ -477,8 +477,8 @@ async function createLock_check() {
 			<br><br>
 			You can always extend your lockup period after the creation of your eLOCKS NFT as well as add more LP tokens to it whenever you like! Furthermore, anyone else can also Gift more LP tokens to your NFT. These features can be used to setup an autocompounder to further maximize your Yields with eLOCKS!
 			<br><br>
-			<button class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</button><br>
-			<button class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</button>
+			<div class="submit equal-gradient grayed" onclick="window.location='#'">Cancel</div><br>
+			<div class="submit equal-gradient" onclick="createLock()">I Agree, LFG!</div>
 		`);
 	}
 
@@ -758,42 +758,42 @@ async function searchNFT(_NFTID) {
 				<h3>Claimable Fees Rewards</h3>
 				${ LD.symbol0 } : ${ LD.cfees0.toFixed(Math.log10(LD.deci0)) }
 				<br>${ LD.symbol1 } : ${ LD.cfees1.toFixed(Math.log10(LD.deci1)) }
-				<br><button class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </button>
+				<div class="submit equal-gradient" onclick="LD_claimFees()"> Claim Fees Rewards </div>
 				<br><br>
 
 				<h3>Toggle Staking of LP</h3>
-				<br><button class="submit equal-gradient" onclick="LD_toggleStaked()"> Toggle Staking </button>
+				<div class="submit equal-gradient" onclick="LD_toggleStaked()"> Toggle Staking </div>
 				<br><br>
 
 				<h3>Claimable Farming Rewards</h3>
 				${ (LD.crewards.map( (e,i,o) => LD.srewards[i] +" : "+ (e/(LD.drewards[i])).toFixed(Math.log10(LD.drewards[i])) )).join("<br>") }
-				<br><button class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </button>
+				<div class="submit equal-gradient" onclick="LD_claimRewards()"> Claim Farming Rewards </div>
 				<br><br>
 
 				<h3>Change Yield Earner</h3>
 				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-earner" placeholder="Enter an address like 0x1234..5678">
-				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </button>
+				<div ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_setEarner()"> Set Earner </div>
 				<br><br>
 
 				<h3>Transfer your NFT</h3>
 				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-transfer" placeholder="Enter an address like 0x1234..5678">
-				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </button>
+				<div ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_transfer()"> Send </div>
 				<br><br>
 
 				<h3>Increase Locked LP Amount</h3>
 				<input required class="in-box" id="ld-increase" type="number" placeholder="Enter LP amounts like 1337.69" step="0.000000000000000001" min="0.000000000000000001">
 				<br><span id="ld-increase-bal">Your Balance: ? LPT</span>
-				<br><button class="submit equal-gradient" onclick="LD_increase()"> Deposit </button>
+				<div class="submit equal-gradient" onclick="LD_increase()"> Deposit </div>
 				<br><br>
 
 				<h3>Extend Unlock Date</h3>
 				<input ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} required class="in-box" id="ld-extend" type="date" min="${(new Date( LD.expiry )).toISOString().split('T')[0]}" max="${(new Date( Date.now() + (86400e3*365*4) )).toISOString().split('T')[0]}" value="${(new Date( Date.now() + (86400e3) )).toISOString().split('T')[0]}">
-				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </button>
+				<div ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_extend()"> Extend </div>
 				<br><br>
 
 				<h3>Unlock & Withdraw LP</h3>
 				Reclaim your Locked LP tokens.
-				<br><button ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_withdraw()"> Withdraw </button>
+				<div ${window.ethereum?.selectedAddress?.toLowerCase()==LD.owner.toLowerCase()?"":"disabled"} class="submit equal-gradient" onclick="LD_withdraw()"> Withdraw </div>
 				<br><br>
 
 			</div>
