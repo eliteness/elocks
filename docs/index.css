@@ -381,7 +381,7 @@ footer{
 }
 
 
-button.submit {
+.submit {
 	padding: 10px 30px;
 	border-radius: 30px;
 	font-weight: bold;
@@ -391,10 +391,10 @@ button.submit {
 	padding: 6px;
 	font-size: 0.75em;
 }
-button.submit:hover{
+.submit:hover{
 	box-shadow: 0px 2px 2px #0ff
 }
-button.submit:active{
+.submit:active{
 	position: relative;
 	top:2px;
 }
@@ -470,7 +470,7 @@ button:disabled {
 	.topnav-chain {
 		margin: auto
 	}
-	button.submit {
+	.submit {
 		margin: 5px auto;
 		padding: 10px;
 		font-size: 1em;
