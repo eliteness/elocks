@@ -206,23 +206,23 @@ function chainSwitcher() {
 		<h2>Also available at:
 		<div style="max-height:50vh">
 			<div class="chain-selector" onclick="window.location='./base-equalizer'">
-        		<img src="https://ftm.guru/icons/base.svg"/>
-        		<img src="https://ftm.guru/icons/scale.png"/>
+        		<img src="https://ftm1337.eliteness.network/icons/base.svg"/>
+        		<img src="https://ftm1337.eliteness.network/icons/scale.png"/>
         		<span>Equalizer Scale on Base</span>
 			</div>
 			<div class="chain-selector" onclick="window.location='./sonic-equalizer'">
-        		<img src="https://ftm.guru/icons/sonic.png"/>
-        		<img src="https://ftm.guru/icons/equal.png"/>
+        		<img src="https://ftm1337.eliteness.network/icons/sonic.png"/>
+        		<img src="https://ftm1337.eliteness.network/icons/equal.png"/>
         		<span>Equalizer on Sonic</span>
 			</div>
 			<div class="chain-selector" onclick="window.location='./sonic-swapx'">
-        		<img src="https://ftm.guru/icons/ftm.svg"/>
-        		<img src="https://ftm.guru/icons/swapx.png"/>
+        		<img src="https://ftm1337.eliteness.network/icons/ftm.svg"/>
+        		<img src="https://ftm1337.eliteness.network/icons/swapx.png"/>
         		<span>SwapX on Sonic</span>
 			</div>
 			<div class="chain-selector" onclick="window.location='./fantom-equalizer'">
-        		<img src="https://ftm.guru/icons/ftm.svg"/>
-        		<img src="https://ftm.guru/icons/equal.png"/>
+        		<img src="https://ftm1337.eliteness.network/icons/ftm.svg"/>
+        		<img src="https://ftm1337.eliteness.network/icons/equal.png"/>
         		<span>Equalizer on Fantom</span>
 			</div>
 		</div>
